@@ -5,7 +5,9 @@ const getAllHandler = (req, res) => {
     res.status(200).send("Estoy en la ruta GET que trae todos los paises con su respectiva info")
 };
 const getByIdHandler = (req, res) => {
-    res.status(200).send("Estoy en la ruta GET que trae un país por ID (params) con su respectiva info")
+    const { id } = req.params;
+    console.log(id)
+    res.send(`Esta ruta trae la info de id: ${id}`)
 };
 
 const getByNameHandler = (req, res) => {
