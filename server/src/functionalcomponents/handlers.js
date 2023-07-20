@@ -11,11 +11,18 @@ const getByIdHandler = (req, res) => {
 };
 
 const getByNameHandler = (req, res) => {
-    res.status(200).send("Estoy en la ruta GET que trae un país por name (query) con su respectiva info")
+    const { name } = req.query;
+    console.log(name)
+    res.send(`Esta ruta trae la info de Persona: ${name}`)
 };
 
 const postActivitiesHandler = (req, res) => {
-    res.status(200).send("Estoy en la ruta POST que crea una actividad turística y la relaciona con los países solicitados")
+    const {pais, clima, economia} = req.body;
+    res.send(`Estos son los datos a subir:
+        pais:${pais},
+        clima:${clima},
+        economia:${economia}
+    `)
 };
 
 const getActivitiesHandler =(req, res) => {
