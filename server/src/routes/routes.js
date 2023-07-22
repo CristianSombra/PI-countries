@@ -1,10 +1,10 @@
 const { Router } = require("express");
-const { getAllHandler, getByIdHandler, getByNameHandler, postActivitiesHandler, getActivitiesHandler} = require("../functionalcomponents/handlers");
+const { getAllCountriesHandler, getByIdHandler, getByNameHandler, postActivitiesHandler, getActivitiesHandler} = require("../functionalcomponents/handlers");
 
 const routes = Router();
 
 
-routes.get("/", getAllHandler);
+routes.get("/", getAllCountriesHandler);
 
 routes.get("/country/:idPais", getByIdHandler);
 

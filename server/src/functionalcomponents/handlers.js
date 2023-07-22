@@ -1,14 +1,43 @@
+const { getAllInfo, getCountryById, searchCountryByName, createActivity } = require("./controllers");
 
 
+const getAllCountriesHandler = (req, res) => {
+    const allCountries = getAllInfo()
+    res.status(200).send(allCountries)
+}
 
-const getAllHandler = (req, res) => {
-    res.status(200).send("Estoy en la ruta GET que trae todos los paises con su respectiva info")
+
+const getAllHandler = async (req, res) => {
+  const { name } = req.query;
+  const results = name ? searchCountryByName(name) : await getAllCountries()
+  
+    res.status(200).send(results)
 };
-const getByIdHandler = (req, res) => {
+
+
+
+const getByIdHandler = async (req, res) => {
     const { id } = req.params;
-    console.log(id)
-    res.send(`Esta ruta trae la info de id: ${id}`)
-};
+    console.log(id);
+  
+    try {
+      const countryFromDb = await Country.findByPk(id);
+      if (countryFromDb) {
+        res.status(200).json(countryFromDb);
+      } else {
+        const countryFromApi = await getCountryById(id, 'api');
+        if (countryFromApi) {
+          res.status(200).json(countryFromApi);
+        } else {
+          res.status(404).json({ error: "Country not found" });
+        }
+      }
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  };
+
+
 
 const getByNameHandler = (req, res) => {
     const { name } = req.query;
@@ -16,13 +45,14 @@ const getByNameHandler = (req, res) => {
     res.send(`Esta ruta trae la info de Persona: ${name}`)
 };
 
-const postActivitiesHandler = (req, res) => {
-    const {pais, clima, economia} = req.body;
-    res.send(`Estos son los datos a subir:
-        pais:${pais},
-        clima:${clima},
-        economia:${economia}
-    `)
+const postActivitiesHandler = async (req, res) => {
+    const {name, difficulty, duration, season} = req.body;
+    try {    
+        const newActivity = await createActivity(name, difficulty, duration, season);
+        res.status(200).json(newActivity)
+    } catch (error) {
+        res.status(400).json({error:error.message})
+    };
 };
 
 const getActivitiesHandler =(req, res) => {
@@ -30,7 +60,7 @@ const getActivitiesHandler =(req, res) => {
 };
 
 module.exports = {
-    getAllHandler,
+    getAllCountriesHandler,
     getByIdHandler,
     getByNameHandler,
     postActivitiesHandler,
