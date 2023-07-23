@@ -1,11 +1,11 @@
 const { Country, Activity } = require("../db");
+const { Op } = require("sequelize");
 const axios = require("axios");
 
 const checkDbCountries = async () => {
   const countries = await Country.findAll();
   return countries.length > 0; // Devuelve true si hay países en la base de datos, false si está vacía.
 };
-
 
 // Función auxiliar para formatear los datos del país.
 const formatCountryData = (data) => {
@@ -24,55 +24,48 @@ const formatCountryData = (data) => {
 const getAllInfo = async () => {
   const isDataInDb = await checkDbCountries();
 
-  if (isDataInDb) {
-    // Si hay datos en la base de datos, obtenerlos desde allí.
+  if (isDataInDb) { // Si hay datos en la base de datos, obtenerlos desde allí.
     const countriesFromDB = await Country.findAll();
     return countriesFromDB;
-  } else {
-    // Si no hay datos en la base de datos, obtenerlos desde la API.
+  } else { // Si no hay datos en la base de datos, obtenerlos desde la API.
     const apiUrl = "http://localhost:5000/countries";
     const response = await axios.get(apiUrl);
 
-    // Formatear los datos de los países.
-    const formattedData = response.data.map(formatCountryData);
+    
+    const formattedData = response.data.map(formatCountryData); // Formatear los datos de los países.
 
-    // Almacenar los países en la base de datos.
-    await Country.bulkCreate(formattedData);
+    await Country.bulkCreate(formattedData); // Almacenar los países en la base de datos.
 
     return formattedData;
   }
 };
 
 
+const getCountryByIdFromDb = async (id) => {
 
-const searchCountryByName = () => {}
+  const upperCaseId = id.toUpperCase(); // Convertir el ID a mayúsculas
+
+  // Buscar el país por su ID en la base de datos (insensible a mayúsculas o minúsculas)
+  const country = await Country.findOne({
+    where: { id: upperCaseId },
+  });
+
+  return country; // Retornar el país encontrado o null si no se encuentra
+};
 
 
+const searchCountryByName = async (name) => {
+  // Buscar países en la base de datos que coincidan con el nombre proporcionado, de forma insensible a mayúsculas o minúsculas
+  const countries = await Country.findAll({
+    where: {
+      name: {
+        [Op.iLike]: `%${name}%`,
+      },
+    },
+  });
 
-
-
-
-// const getCountryById = async (id, source) => {
-//     const country = source === "api" 
-//     ? (await axios.get(`http://localhost:5000/countries/${(id)}`)).data 
-//     : await Country.findByPk(id)
-
-//     return country;
-// }
-
-  const getCountryByIdFromDatabase = async (id) => {
-    return await Country.findByPk(id);
-  };
-  
-  const getCountryById = async (id) => {
-    let country = await getCountryByIdFromDatabase(id);
-    
-    if (!country) {
-      country = await getCountryByIdFromApi(id);
-    }
-    
-    return country;
-  };
+  return countries;
+};
 
 
 const createActivity = async (name, difficulty, duration, season) => 
@@ -81,4 +74,4 @@ const createActivity = async (name, difficulty, duration, season) =>
 
 
 
-module.exports = { getAllInfo, searchCountryByName, getCountryById, createActivity };
+module.exports = { getAllInfo, getCountryByIdFromDb, searchCountryByName, createActivity };

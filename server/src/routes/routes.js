@@ -6,7 +6,7 @@ const routes = Router();
 
 routes.get("/", getAllCountriesHandler);
 
-routes.get("/country/:idPais", getByIdHandler);
+routes.get("/country/:id", getByIdHandler);
 
 routes.get("/country", getByNameHandler);
 
