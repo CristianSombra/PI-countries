@@ -5,9 +5,10 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('country', {
     id: {
-      type: DataTypes.STRING(3), //almacena datos de caracteres en un campo de longitud fija
-      primaryKey: true,
-      allowNull: false
+      type: DataTypes.STRING,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
+      primaryKey: true
     },
     name: {
       type: DataTypes.STRING,
