@@ -50,19 +50,22 @@ const getByNameHandler = async (req, res) => {
 };
 
 
+
 const postActivitiesHandler = async (req, res) => {
-    const {name, difficulty, duration, season} = req.body;
-    try {    
-        const newActivity = await createActivity(name, difficulty, duration, season);
-        res.status(200).json(newActivity)
-    } catch (error) {
-        res.status(400).json({error:error.message})
-    };
+  const { name, difficulty, duration, season, countries } = req.body;
+
+  try {
+    const newActivity = await createActivity(name, difficulty, duration, season, countries);
+    res.status(200).json(newActivity);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 };
 
 const getActivitiesHandler =(req, res) => {
     res.status(200).send("Estoy en la ruta GET que trae todas las actividades")
 };
+
 
 module.exports = {
     getAllCountriesHandler,

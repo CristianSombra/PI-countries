@@ -68,8 +68,18 @@ const searchCountryByName = async (name) => {
 };
 
 
-const createActivity = async (name, difficulty, duration, season) => 
-    await Activity.create({name, difficulty, duration, season});
+const createActivity = async (name, difficulty, duration, season, countries) => {
+  // Crear la actividad turística en la base de datos
+  let activity = await Activity.create({ name, difficulty, duration, season });
+
+  // Relacionar la actividad con los países indicados
+  if (countries && countries.length > 0) {
+    await activity.setCountries(countries);
+  }
+
+  return activity;
+};
+
 
 
 

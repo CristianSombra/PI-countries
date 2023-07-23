@@ -5,7 +5,7 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('country', {
     id: {
-      type: DataTypes.CHAR(3), //almacena datos de caracteres en un campo de longitud fija
+      type: DataTypes.STRING(3), //almacena datos de caracteres en un campo de longitud fija
       primaryKey: true,
       allowNull: false
     },
