@@ -99,5 +99,16 @@ const createActivity = async (name, difficulty, duration, season, countries) => 
 
 
 
+const getAllActivities = async () => {
+  const activities = await Activity.findAll({
+    attributes: {
+      exclude: ['createdAt', 'updatedAt'],
+    },
+  });
 
-module.exports = { getAllInfo, getCountryByIdFromDb, searchCountryByName, createActivity };
+  return activities;
+};
+
+
+
+module.exports = { getAllInfo, getCountryByIdFromDb, searchCountryByName, createActivity, getAllActivities };

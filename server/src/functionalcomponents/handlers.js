@@ -1,4 +1,4 @@
-const { getAllInfo, getCountryByIdFromDb, searchCountryByName, createActivity } = require("./controllers");
+const { getAllInfo, getCountryByIdFromDb, searchCountryByName, createActivity, getAllActivities  } = require("./controllers");
 
 
 const getAllCountriesHandler = async (req, res) => {
@@ -62,8 +62,14 @@ const postActivitiesHandler = async (req, res) => {
   }
 };
 
-const getActivitiesHandler =(req, res) => {
-    res.status(200).send("Estoy en la ruta GET que trae todas las actividades")
+
+const getActivitiesHandler = async (req, res) => {
+  try {
+    const activities = await getAllActivities();
+    res.status(200).json(activities);
+  } catch (error) {
+    res.status(500).json({ error: "Error al obtener las actividades desde la base de datos" });
+  }
 };
 
 
