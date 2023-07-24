@@ -24,17 +24,22 @@ const formatCountryData = (data) => {
 const getAllInfo = async () => {
   const isDataInDb = await checkDbCountries();
 
-  if (isDataInDb) { // Si hay datos en la base de datos, obtenerlos desde allí.
-    const countriesFromDB = await Country.findAll();
+  if (isDataInDb) {
+    // Si hay datos en la base de datos, obtenerlos desde allí junto con sus actividades asociadas.
+    const countriesFromDB = await Country.findAll({
+      include: {
+        model: Activity,
+        through: { attributes: [] } // Excluimos los campos de la tabla de relación
+      }
+    });
     return countriesFromDB;
-  } else { // Si no hay datos en la base de datos, obtenerlos desde la API.
+  } else {
+    // Si no hay datos en la base de datos, obtenerlos desde la API y almacenarlos en la base de datos.
     const apiUrl = "http://localhost:5000/countries";
     const response = await axios.get(apiUrl);
 
-    
-    const formattedData = response.data.map(formatCountryData); // Formatear los datos de los países.
-
-    await Country.bulkCreate(formattedData); // Almacenar los países en la base de datos.
+    const formattedData = response.data.map(formatCountryData);
+    await Country.bulkCreate(formattedData);
 
     return formattedData;
   }
@@ -42,26 +47,31 @@ const getAllInfo = async () => {
 
 
 const getCountryByIdFromDb = async (id) => {
+  const upperCaseId = id.toUpperCase();
 
-  const upperCaseId = id.toUpperCase(); // Convertir el ID a mayúsculas
-
-  // Buscar el país por su ID en la base de datos (insensible a mayúsculas o minúsculas)
   const country = await Country.findOne({
     where: { id: upperCaseId },
+    include: {
+      model: Activity,
+      through: { attributes: [] }
+    }
   });
 
-  return country; // Retornar el país encontrado o null si no se encuentra
+  return country;
 };
 
 
 const searchCountryByName = async (name) => {
-  // Buscar países en la base de datos que coincidan con el nombre proporcionado, de forma insensible a mayúsculas o minúsculas
   const countries = await Country.findAll({
     where: {
       name: {
         [Op.iLike]: `%${name}%`,
       },
     },
+    include: {
+      model: Activity,
+      through: { attributes: [] }
+    }
   });
 
   return countries;
@@ -70,11 +80,17 @@ const searchCountryByName = async (name) => {
 
 const createActivity = async (name, difficulty, duration, season, countries) => {
   // Crear la actividad turística en la base de datos
-  let activity = await Activity.create({ name, difficulty, duration, season });
+  const activity = await Activity.create({ name, difficulty, duration, season });
 
   // Relacionar la actividad con los países indicados
   if (countries && countries.length > 0) {
-    await activity.setCountries(countries);
+    const validCountryIds = countries.map(countryId => countryId.toUpperCase()); // Asegurarnos de que los códigos de país estén en mayúsculas
+
+    const countriesFound = await Country.findAll({
+      where: { id: validCountryIds },
+    });
+
+    await activity.setCountries(countriesFound); // Relacionar la actividad con los países encontrados en la base de datos
   }
 
   return activity;
