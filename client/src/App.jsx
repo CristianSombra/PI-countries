@@ -1,18 +1,20 @@
 // import { useState } from 'react'
-import { Routes, Route } from 'react-router-dom';
-import Home from "./views/home/home";
-import Landing from "./views/landing/landing";
-import Detail from "./views/detail/detail";
-import Form from "./views/form/form";
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { Home, Landing, Detail, Form } from './views/index';
+import Navbar from './components/navbar/navbar';
 
 function App() {
+
+  const location = useLocation();
+
   return (
     <div className="APP">
+      {location.pathname !== "/" && <Navbar />}
       <Routes>
-        <Route path="/" element={<Landing />} />
+        <Route exact path="/" element={<Landing />} />
         <Route path="/Home" element={<Home />} />
         <Route path="/Detail" element={<Detail />} />
-        <Route path="/Form" element={<Form />} />
+        <Route path="/Create" element={<Form />} />
       </Routes>
     </div>
   );
