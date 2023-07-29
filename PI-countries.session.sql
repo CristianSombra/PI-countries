@@ -1,1 +1,1 @@
-SELECT * FROM "countries";
+SELECT * FROM "Country_Activity";
