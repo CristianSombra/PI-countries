@@ -1,0 +1,45 @@
+.landing {
+    background: url('https://static.vecteezy.com/system/resources/previews/010/538/537/non_2x/map-world-seperate-countries-blue-background-with-outline-free-photo.jpg');
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 100px 150px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.landing-content {
+    text-align: center;
+    margin-bottom: 50px; /* Ajustamos la distancia desde la parte inferior */
+    max-width: 600px; /* Limitamos el ancho del contenido */
+    background-color: rgba(255, 255, 255, 0.7); /* Fondo blanco semi-transparente */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+.landing h1 {
+    font-size: 60px; /* Tamaño de fuente más grande */
+    margin-bottom: 20px;
+    font-family: 'Times New Roman', serif; /* Cambiamos la fuente a Times New Roman */
+    font-weight: bold; /* Texto en negrita */
+    color: #222; /* Color más oscuro */
+}
+
+.landing button {
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 25px; /* Mayor borde redondeado */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra futurista */
+    transition: background-color 0.3s ease-in-out; /* Transición suave al pasar el ratón */
+}
+
+.landing button:hover {
+    background-color: #0056b3;
+}

@@ -1,9 +1,9 @@
 import CardsContainer from "../../components/cardscontainer/cardscontainer";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { getCountries } from "../../redux/actions";
 
-const Home = () => {
+export default function Home () {
 
     const dispatch =  useDispatch();
 
@@ -19,6 +19,3 @@ const Home = () => {
         </>
     )
 };
-
-
-export default Home;
