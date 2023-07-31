@@ -1,0 +1,24 @@
+/* Resto de estilos ya existentes */
+
+.paginatorContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .pagination {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .paginationButton {
+    flex: 1;
+  }
+  
+  .paginationInfo {
+    flex: 2;
+    text-align: center;
+  }
+  

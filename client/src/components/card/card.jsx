@@ -7,7 +7,9 @@ const Card = (props) => {
 
   return (
     <div className={style.card}>
-      <img src={props.image} alt={props.name} className={style.flagImage} />
+      <div className={style.flagImageContainer}>
+        <img src={props.image} alt={props.name} className={style.flagImage} />
+      </div>
       <div className={style.cardContent}>
         <h2>{props.name}</h2>
         <p>Continent: {props.continent}</p>

@@ -1,12 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "../../components/card/card";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCountries } from "../../redux/actions";
+import Paginator from "../../components/paginator/paginator";
+import styles from "./home.module.css";
 
 export default function Home() {
   const dispatch = useDispatch();
   const allCountries = useSelector((state) => state.countries);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     dispatch(getCountries());
@@ -16,6 +19,11 @@ export default function Home() {
     e.preventDefault();
     dispatch(getCountries());
   }
+
+  const countriesPerPage = 10;
+  const totalPages = Math.ceil(allCountries.length / countriesPerPage);
+  const startIndex = (currentPage - 1) * countriesPerPage;
+  const endIndex = startIndex + countriesPerPage;
 
   return (
     <div>
@@ -38,19 +46,46 @@ export default function Home() {
         </select>
       </div>
 
-      <div className="cards-container">
-      {allCountries &&
-        allCountries.map((country) => (
-          <Card
-            key={country.id}
-            name={country.name}
-            image={country.image}
-            continent={country.continent}
-            showDetails={false}
-          />
-        ))}
-          
+      <div className={styles.cardsContainer}>
+        {allCountries &&
+          allCountries
+            .slice(startIndex, endIndex)
+            .map((country) => (
+              <Card
+                key={country.id}
+                name={country.name}
+                image={country.image}
+                continent={country.continent}
+                showDetails={false}
+              />
+            ))}
       </div>
-    // </div>
+
+      <div className={styles.paginatorContainer}>
+        <div className={styles.pagination}>
+          <div className={styles.paginationButton}>
+            <button
+              className={`${styles.button} ${styles.anterior}`}
+              onClick={() => setCurrentPage(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              Anterior
+            </button>
+          </div>
+          <div className={styles.paginationInfo}>
+            Página {currentPage} de {totalPages}
+          </div>
+          <div className={styles.paginationButton}>
+            <button
+              className={`${styles.button} ${styles.siguiente}`}
+              onClick={() => setCurrentPage(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              Siguiente
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
