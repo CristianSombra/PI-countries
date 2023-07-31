@@ -1,7 +1,49 @@
-.card{
-    border: 1px solid black;
-    display: flex;
-    flex-direction: row;
+.card {
+    background-color: #007bff;
     border-radius: 15px;
-    flex-wrap: wrap;
-};
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+    max-width: 500px; /* Limitamos el ancho máximo de la tarjeta */
+  }
+  
+  .flagImage {
+    width: 200px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 15px 0 0 15px; /* Bordes redondeados solo en la esquina izquierda */
+  }
+  
+  .cardContent {
+    flex: 1;
+    margin-left: 20px; /* Añadimos un margen a la izquierda del contenido del texto */
+  }
+  
+  .card h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #fff;
+  }
+  
+  .activities {
+    margin-top: 20px;
+    color: #fff;
+  }
+  
+  .activities h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .activities ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  .activities li {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
