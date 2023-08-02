@@ -1,7 +1,12 @@
 import axios from "axios";
 
-export const GET_COUNTRIES = "GET_COUNTRIES"
-// export const GET_COUNTRY = "GET_COUNTRY"
+
+//Después modularizar las constantes de a continuación:
+export const GET_COUNTRIES = "GET_COUNTRIES";
+export const GET_BY_ALFABETIC_ORDER = "GET_BY_ALFABETIC_ORDER";
+
+
+
 
 export const getCountries = () => {
     return async function (dispatch) {
@@ -23,3 +28,11 @@ export const getCountries = () => {
 //         dispatch({type: GET_COUNTRY, payload: country})
 //     };
 // };
+
+
+export function byAlfabeticOrder(payload) {
+    return {
+        type: GET_BY_ALFABETIC_ORDER,
+        payload
+    }
+};

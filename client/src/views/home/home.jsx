@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import Card from "../../components/card/card";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getCountries } from "../../redux/actions";
-import Paginator from "../../components/paginator/paginator";
+import { getCountries, byAlfabeticOrder } from "../../redux/actions"; // Importar la acción byAlfabeticOrder
+
 import styles from "./home.module.css";
 
 export default function Home() {
   const dispatch = useDispatch();
   const allCountries = useSelector((state) => state.countries);
   const [currentPage, setCurrentPage] = useState(1);
+  const [order, setOrder] = useState("asc"); // Definir el estado local para el orden
 
   useEffect(() => {
     dispatch(getCountries());
@@ -18,6 +19,11 @@ export default function Home() {
   function handlerClick(e) {
     e.preventDefault();
     dispatch(getCountries());
+  }
+
+  function handlerAlfabeticOrder(e) {
+    dispatch(byAlfabeticOrder(e.target.value)); // Despachar la acción byAlfabeticOrder con el valor seleccionado
+    setOrder(e.target.value); // Actualizar el estado local del orden
   }
 
   const countriesPerPage = 10;
@@ -32,7 +38,7 @@ export default function Home() {
       <button onClick={(e) => handlerClick(e)}>Volver a cargar todos los paises</button>
 
       <div>
-        <select>
+        <select value={order} onChange={handlerAlfabeticOrder}>
           <option value="asc">Ascendente por Nombre</option>
           <option value="desc">Descendente por Nombre</option>
         </select>

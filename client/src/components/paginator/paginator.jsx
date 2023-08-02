@@ -2,14 +2,14 @@ import React from 'react';
 import styles from './paginator.module.css';
 
 function Paginator({ currentPage, setCurrentPage, max }) {
-  const nextPage = () => {
+  const nextPage = () => {  
     setCurrentPage((prevPage) => Math.min(prevPage + 1, max));
   };
 
   const previousPage = () => {
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
   };
-
+ 
   return (
     <div className={styles.container}>
       <button
