@@ -4,7 +4,9 @@ import axios from "axios";
 //Después modularizar las constantes de a continuación:
 export const GET_COUNTRIES = "GET_COUNTRIES";
 export const GET_BY_ALFABETIC_ORDER = "GET_BY_ALFABETIC_ORDER";
-
+export const GET_BY_POPULATION_ORDER = "GET_BY_POPULATION_ORDER";
+export const GET_BY_CONTINENT_ORDER = "GET_BY_CONTINENT_ORDER"
+export const GET_BY_ACTIVITY_ORDER = "GET_BY_ACTIVITY_ORDER"
 
 
 
@@ -33,6 +35,27 @@ export const getCountries = () => {
 export function byAlfabeticOrder(payload) {
     return {
         type: GET_BY_ALFABETIC_ORDER,
+        payload
+    }
+};
+
+export function byPopulationOrder(payload) {
+    return {
+        type: GET_BY_POPULATION_ORDER,
+        payload
+    }
+};
+
+export function byContinentOrder(payload) {
+    return {
+        type: GET_BY_CONTINENT_ORDER,
+        payload
+    }
+};
+
+export function byActivityOrder(payload) {
+    return {
+        type: GET_BY_ACTIVITY_ORDER,
         payload
     }
 };

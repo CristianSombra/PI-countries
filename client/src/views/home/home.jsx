@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import Card from "../../components/card/card";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getCountries, byAlfabeticOrder } from "../../redux/actions"; // Importar la acción byAlfabeticOrder
+import { getCountries } from "../../redux/actions";
+import { useReloadCountriesHandler, useAlfabeticOrderHandlers, usePopulationOrderHandlers, useContinentOrderHandlers, useActivityHandler } from "../../components/handlers/handlers";
 
 import styles from "./home.module.css";
 
@@ -10,21 +11,17 @@ export default function Home() {
   const dispatch = useDispatch();
   const allCountries = useSelector((state) => state.countries);
   const [currentPage, setCurrentPage] = useState(1);
-  const [order, setOrder] = useState("asc"); // Definir el estado local para el orden
+  const [orderName, setOrderName] = useState("asc");
+  const [orderPopulation, setOrderPopulation] = useState("asc");
 
   useEffect(() => {
     dispatch(getCountries());
   }, [dispatch]);
 
-  function handlerClick(e) {
-    e.preventDefault();
-    dispatch(getCountries());
-  }
-
-  function handlerAlfabeticOrder(e) {
-    dispatch(byAlfabeticOrder(e.target.value)); // Despachar la acción byAlfabeticOrder con el valor seleccionado
-    setOrder(e.target.value); // Actualizar el estado local del orden
-  }
+  const handlerClick = useReloadCountriesHandler();
+  const { handlerAlfabeticOrderAsc, handlerAlfabeticOrderDesc } = useAlfabeticOrderHandlers();
+  const { handlerPopulationOrderAsc, handlerPopulationOrderDesc } = usePopulationOrderHandlers();
+  const { handlerContinentOrder } = useContinentOrderHandlers();
 
   const countriesPerPage = 10;
   const totalPages = Math.ceil(allCountries.length / countriesPerPage);
@@ -38,16 +35,51 @@ export default function Home() {
       <button onClick={(e) => handlerClick(e)}>Volver a cargar todos los paises</button>
 
       <div>
-        <select value={order} onChange={handlerAlfabeticOrder}>
-          <option value="asc">Ascendente por Nombre</option>
-          <option value="desc">Descendente por Nombre</option>
-        </select>
+        <button
+          onClick={handlerAlfabeticOrderAsc}
+          className={orderName === "asc" ? styles.activeButton : ""}
+        >
+          Ascendente por Nombre
+        </button>
+        <button
+          onClick={handlerAlfabeticOrderDesc}
+          className={orderName === "desc" ? styles.activeButton : ""}
+        >
+          Descendente por Nombre
+        </button>
+        <button
+          onClick={() => {
+            handlerPopulationOrderAsc();
+            setOrderPopulation("asc");
+          }}
+          className={orderPopulation === "asc" ? styles.activeButton : ""}
+        >
+          Ascendente por cantidad de población
+        </button>
+        <button
+          onClick={() => {
+            handlerPopulationOrderDesc();
+            setOrderPopulation("desc");
+          }}
+          className={orderPopulation === "desc" ? styles.activeButton : ""}
+        >
+          Descendente por cantidad de población
+        </button>
+
+        <div className={styles.filter}>
+              <select onChange={(e) => handlerContinentOrder(e.target.value)}>
+                    <option value='All' key='All'>All continents</option>
+                    <option value='Africa' key='Africa'>Africa</option>
+                    <option value='Antarctic'>Antarctic</option>
+                    <option value='Asia' key='Asia'>Asia</option>
+                    <option value='Europe' key='Europe'>Europa</option>
+                    <option value='Americas' key='Americas'>America</option>
+                    <option value='Oceania' key='Oceania'>Oceania</option>
+              </select>
+
+        </div>
+
         <select>
-          <option value="asc">Ascendente por cantidad de población</option>
-          <option value="desc">Descendente por cantidad de población</option>
-        </select>
-        <select>
-          <option value="cont">Filtrar por continente</option>
           <option value="act">Filtrar por actividad turística</option>
         </select>
       </div>
