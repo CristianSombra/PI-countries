@@ -23,8 +23,9 @@ export default function Home() {
   const { handlerAlfabeticOrderAsc, handlerAlfabeticOrderDesc } = useAlfabeticOrderHandlers();
   const { handlerPopulationOrderAsc, handlerPopulationOrderDesc } = usePopulationOrderHandlers();
   const { handlerContinentOrder } = useContinentOrderHandlers();
-  const { order, handleActivityChange } = useActivityHandler(); // Obtenemos el estado y la función del hook useActivityHandler
-
+  const { order, handleActivityChange } = useActivityHandler();
+  console.log("Order:", order);
+  
   const countriesPerPage = 10;
   const totalPages = Math.ceil(allCountries.length / countriesPerPage);
   const startIndex = (currentPage - 1) * countriesPerPage;
@@ -81,15 +82,15 @@ export default function Home() {
         </div>
 
         <div className={styles.filter}>
-          <select onChange={(e) => handleActivityChange(e)}>
-            <option value="All">Filtrar por actividad turística</option>
-            {allActivities.map((activity) => (
-              <option value={activity} key={activity}>
-                {activity}
-              </option>
-            ))}
-          </select>
-        </div>
+        <select onChange={(e) => handleActivityChange(e)}>
+          <option value="All">Filtrar por actividad turística</option>
+          {allActivities.map((activity) => (
+            <option value={activity} key={activity}>
+              {activity}
+            </option>
+          ))}
+        </select>
+      </div>
       </div>
 
       <div className={styles.cardsContainer}>

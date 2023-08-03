@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getCountries, byAlfabeticOrder, byPopulationOrder, byContinentOrder, byActivityOrder } from "../../redux/actions";
 
@@ -60,13 +61,16 @@ export function useContinentOrderHandlers() {
 
 export function useActivityHandler() {
   const dispatch = useDispatch();
+  const [order, setOrder] = useState("All");
 
-  function handleActivityChange(e) {
-    e.preventDefault();
-    dispatch(byActivityOrder(e.target.value));
+  function handleActivityChange(selectedActivity) {
+    console.log("Selected activity:", selectedActivity);
+    setOrder(selectedActivity);
+    dispatch(byActivityOrder(selectedActivity, 'asc'));
   }
 
   return {
+    order,
     handleActivityChange,
   };
 }

@@ -53,9 +53,8 @@ export function byContinentOrder(payload) {
     }
 };
 
-export function byActivityOrder(payload) {
-    return {
-        type: GET_BY_ACTIVITY_ORDER,
-        payload
-    }
-};
+export const byActivityOrder = (activity, order) => ({ // Pasa "order" como argumento aquí
+    type: GET_BY_ACTIVITY_ORDER,
+    payload: activity,
+    order: order, // Incluye "order" como parte del objeto payload
+  });
