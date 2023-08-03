@@ -10,6 +10,7 @@ import styles from "./home.module.css";
 export default function Home() {
   const dispatch = useDispatch();
   const allCountries = useSelector((state) => state.countries);
+  const allActivities = useSelector((state) => state.allActivities); // Agregamos la selección de allActivities
   const [currentPage, setCurrentPage] = useState(1);
   const [orderName, setOrderName] = useState("asc");
   const [orderPopulation, setOrderPopulation] = useState("asc");
@@ -22,6 +23,7 @@ export default function Home() {
   const { handlerAlfabeticOrderAsc, handlerAlfabeticOrderDesc } = useAlfabeticOrderHandlers();
   const { handlerPopulationOrderAsc, handlerPopulationOrderDesc } = usePopulationOrderHandlers();
   const { handlerContinentOrder } = useContinentOrderHandlers();
+  const { order, handleActivityChange } = useActivityHandler(); // Obtenemos el estado y la función del hook useActivityHandler
 
   const countriesPerPage = 10;
   const totalPages = Math.ceil(allCountries.length / countriesPerPage);
@@ -67,21 +69,27 @@ export default function Home() {
         </button>
 
         <div className={styles.filter}>
-              <select onChange={(e) => handlerContinentOrder(e.target.value)}>
-                    <option value='All' key='All'>All continents</option>
-                    <option value='Africa' key='Africa'>Africa</option>
-                    <option value='Antarctic'>Antarctic</option>
-                    <option value='Asia' key='Asia'>Asia</option>
-                    <option value='Europe' key='Europe'>Europa</option>
-                    <option value='Americas' key='Americas'>America</option>
-                    <option value='Oceania' key='Oceania'>Oceania</option>
-              </select>
-
+          <select onChange={(e) => handlerContinentOrder(e.target.value)}>
+            <option value='All' key='All'>All continents</option>
+            <option value='Africa' key='Africa'>Africa</option>
+            <option value='Antarctic'>Antarctic</option>
+            <option value='Asia' key='Asia'>Asia</option>
+            <option value='Europe' key='Europe'>Europa</option>
+            <option value='Americas' key='Americas'>America</option>
+            <option value='Oceania' key='Oceania'>Oceania</option>
+          </select>
         </div>
 
-        <select>
-          <option value="act">Filtrar por actividad turística</option>
-        </select>
+        <div className={styles.filter}>
+          <select onChange={(e) => handleActivityChange(e)}>
+            <option value="All">Filtrar por actividad turística</option>
+            {allActivities.map((activity) => (
+              <option value={activity} key={activity}>
+                {activity}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
       <div className={styles.cardsContainer}>

@@ -58,9 +58,15 @@ export function useContinentOrderHandlers() {
   };
 }
 
+export function useActivityHandler() {
+  const dispatch = useDispatch();
 
-export function useActivityHandler(e) {
-  e.preventDefault();
-  dispatch(byActivityOrder(e.target.value))
-  setOrder(e.target.value)
+  function handleActivityChange(e) {
+    e.preventDefault();
+    dispatch(byActivityOrder(e.target.value));
+  }
+
+  return {
+    handleActivityChange,
+  };
 }
