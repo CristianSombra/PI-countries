@@ -4,13 +4,31 @@ import {
   GET_BY_POPULATION_ORDER,
   GET_BY_CONTINENT_ORDER,
   GET_BY_ACTIVITY_ORDER,
+  GET_COUNTRY_BY_NAME,
 } from "./actions";
 
 const initialState = {
   countries: [],
   allContinents: [],
   allActivities: [], // Agrega la propiedad allActivities al estado inicial
+  filteredCountries: [], // Nuevo campo para almacenar los países filtrados
+  selectedCountry: null, // Nuevo campo para almacenar el país seleccionado por su nombre
 };
+
+// // Función auxiliar para obtener todas las actividades únicas de los países
+const getAllActivities = (countries) => {
+  const allActivitiesSet = new Set();
+  countries.forEach((country) => {
+    country.activities.forEach((activity) => {
+      allActivitiesSet.add(activity.name);
+    });
+  });
+  const allActivitiesArray = Array.from(allActivitiesSet);
+  // console.log("All activities array:", allActivitiesArray);
+  return allActivitiesArray;
+};
+
+
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -58,57 +76,40 @@ const rootReducer = (state = initialState, action) => {
       };
 
       case GET_BY_ACTIVITY_ORDER:
-        if (action.payload === 'All') {
+        const activityName = action.payload;
+        if (activityName === "all") {
           return {
             ...state,
-            countries: state.allContinents,
+            countries: state.allContinents, // Muestra todos los países almacenados en allContinents
           };
         }
-      
-        const allActivities = state.allActivities;
-        const activityFilter = allActivities.filter((activity) => {
-          if (activity && activity.activities) { // Agregamos esta verificación aquí
-            const foundActivity = activity.activities.find((a) => a.name && a.name.toLowerCase() === action.payload);
-            return foundActivity;
-          }
-          return false;
-        });
-      
-        const filteredCountriesByActivity = action.order.filter((country) => {
-          return activityFilter.some((activity) => {
-            if (country && country.activities) { // Y también aquí
-              const foundActivity = country.activities.find((a) => a.name && a.name.toLowerCase() === activity.name.toLowerCase());
-              return foundActivity;
-            }
-            return false;
-          });
-        });
-      
-        return {
-          ...state,
-          countries: filteredCountriesByActivity,
-        };
-      
-    
-      default:
-        return state;
-    }
-  };
   
+        const filteredCountries = state.countries.filter((country) => {
+          const activities = country.activities || []; // Si no hay actividades, inicializa como un arreglo vacío
+          return activities.some((activity) =>
+            activity.name.toLowerCase() === activityName
+          );
+        });
+  
+          return {
+            ...state,
+            countries: filteredCountries,
+        };
 
-// Función auxiliar para obtener todas las actividades únicas de los países
-const getAllActivities = (countries) => {
-  const allActivitiesSet = new Set();
-  countries.forEach((country) => {
-    country.activities.forEach((activity) => {
-      allActivitiesSet.add(activity.name);
-    });
-  });
-  const allActivitiesArray = Array.from(allActivitiesSet);
-  // console.log("All activities array:", allActivitiesArray);
-  return allActivitiesArray;
-};
 
+  
+        case GET_COUNTRY_BY_NAME:
+          return {
+            ...state,
+            countries: action.payload, // Actualizamos los países con la respuesta de la búsqueda
+          };
+          
+          
+        default:
+          return state;
+      }
+    };
+  
 
 
 export default rootReducer;

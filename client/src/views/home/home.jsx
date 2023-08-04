@@ -4,16 +4,18 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCountries } from "../../redux/actions";
 import { useReloadCountriesHandler, useAlfabeticOrderHandlers, usePopulationOrderHandlers, useContinentOrderHandlers, useActivityHandler } from "../../components/handlers/handlers";
+import SearchBar from "../../components/searchbar/searchbar"; // Importa la SearchBar
 
 import styles from "./home.module.css";
 
 export default function Home() {
   const dispatch = useDispatch();
   const allCountries = useSelector((state) => state.countries);
-  const allActivities = useSelector((state) => state.allActivities); // Agregamos la selección de allActivities
+  const allActivities = useSelector((state) => state.allActivities);
   const [currentPage, setCurrentPage] = useState(1);
   const [orderName, setOrderName] = useState("asc");
   const [orderPopulation, setOrderPopulation] = useState("asc");
+
 
   useEffect(() => {
     dispatch(getCountries());
@@ -24,18 +26,21 @@ export default function Home() {
   const { handlerPopulationOrderAsc, handlerPopulationOrderDesc } = usePopulationOrderHandlers();
   const { handlerContinentOrder } = useContinentOrderHandlers();
   const { order, handleActivityChange } = useActivityHandler();
-  console.log("Order:", order);
-  
+
   const countriesPerPage = 10;
   const totalPages = Math.ceil(allCountries.length / countriesPerPage);
   const startIndex = (currentPage - 1) * countriesPerPage;
   const endIndex = startIndex + countriesPerPage;
 
+
   return (
     <div>
       <Link to="/create">Crear actividad turística</Link>
       <h1>Esta es la vista de HOME</h1>
+      <SearchBar />
+
       <button onClick={(e) => handlerClick(e)}>Volver a cargar todos los paises</button>
+
 
       <div>
         <button
@@ -82,7 +87,7 @@ export default function Home() {
         </div>
 
         <div className={styles.filter}>
-        <select onChange={(e) => handleActivityChange(e)}>
+        <select onChange={(e) => handleActivityChange(e.target.value)}>
           <option value="All">Filtrar por actividad turística</option>
           {allActivities.map((activity) => (
             <option value={activity} key={activity}>
@@ -136,3 +141,4 @@ export default function Home() {
     </div>
   );
 }
+

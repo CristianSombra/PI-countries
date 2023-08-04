@@ -3,10 +3,11 @@ import axios from "axios";
 
 //Después modularizar las constantes de a continuación:
 export const GET_COUNTRIES = "GET_COUNTRIES";
+export const GET_COUNTRY_BY_NAME = "GET_COUNTRY_BY_NAME";
 export const GET_BY_ALFABETIC_ORDER = "GET_BY_ALFABETIC_ORDER";
 export const GET_BY_POPULATION_ORDER = "GET_BY_POPULATION_ORDER";
 export const GET_BY_CONTINENT_ORDER = "GET_BY_CONTINENT_ORDER"
-export const GET_BY_ACTIVITY_ORDER = "GET_BY_ACTIVITY_ORDER"
+export const GET_BY_ACTIVITY_ORDER = "GET_BY_ACTIVITY_ORDER";
 
 
 
@@ -20,16 +21,18 @@ export const getCountries = () => {
     }; 
 };
 
-// export const getCountry = (id) => {
-//     return async function (dispatch) {
-//         const apiData = await axios.get(
-//             `http://localhost:3001/countries/${id}`
-//         );
 
-//         const country = apiData.data;
-//         dispatch({type: GET_COUNTRY, payload: country})
-//     };
-// };
+
+export const searchCountryByName = (name) => {
+    return async function (dispatch) {
+        const apiData = await axios.get(
+            `http://localhost:3001/country?name=${name}`
+        );
+
+        const countries = apiData.data;
+        dispatch({ type:  GET_COUNTRY_BY_NAME, payload: countries });
+    };
+};
 
 
 export function byAlfabeticOrder(payload) {
@@ -53,8 +56,7 @@ export function byContinentOrder(payload) {
     }
 };
 
-export const byActivityOrder = (activity, order) => ({ // Pasa "order" como argumento aquí
+export const byActivityOrder = (activityName) => ({
     type: GET_BY_ACTIVITY_ORDER,
-    payload: activity,
-    order: order, // Incluye "order" como parte del objeto payload
+    payload: activityName,
   });
