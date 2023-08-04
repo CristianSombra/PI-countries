@@ -5,6 +5,7 @@ import {
   GET_BY_CONTINENT_ORDER,
   GET_BY_ACTIVITY_ORDER,
   GET_COUNTRY_BY_NAME,
+  GET_DETAIL_BY_ID,
 } from "./actions";
 
 const initialState = {
@@ -103,6 +104,13 @@ const rootReducer = (state = initialState, action) => {
             ...state,
             countries: action.payload, // Actualizamos los países con la respuesta de la búsqueda
           };
+
+          case GET_DETAIL_BY_ID:
+            return {
+              ...state,
+              details: action.payload,
+              loading: false
+            };
           
           
         default:

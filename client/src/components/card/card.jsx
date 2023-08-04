@@ -6,7 +6,7 @@ const Card = (props) => {
   const activities = props.activities || [];
 
   return (
-    <div className={style.card}>
+    <div className={style.cardContainer}>
       <div className={style.flagImageContainer}>
         <img src={props.image} alt={props.name} className={style.flagImage} />
       </div>
@@ -42,3 +42,4 @@ const Card = (props) => {
 };
 
 export default Card;
+

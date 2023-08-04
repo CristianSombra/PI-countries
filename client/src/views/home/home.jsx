@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Card from "../../components/card/card";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCountries } from "../../redux/actions";
 import { useReloadCountriesHandler, useAlfabeticOrderHandlers, usePopulationOrderHandlers, useContinentOrderHandlers, useActivityHandler } from "../../components/handlers/handlers";
-import SearchBar from "../../components/searchbar/searchbar"; // Importa la SearchBar
 
+import SearchBar from "../../components/searchbar/searchbar"; // Importa la SearchBar
+import Card from "../../components/card/card";
 import styles from "./home.module.css";
 
 export default function Home() {
@@ -103,13 +103,14 @@ export default function Home() {
           allCountries
             .slice(startIndex, endIndex)
             .map((country) => (
-              <Card
-                key={country.id}
-                name={country.name}
-                image={country.image}
-                continent={country.continent}
-                showDetails={false}
-              />
+              <Link to={`/Detail/${country.id}`} key={country.id}>
+                <Card
+                  name={country.name}
+                  image={country.image}
+                  continent={country.continent}
+                  showDetails={false}
+                />
+              </Link>
             ))}
       </div>
 

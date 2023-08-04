@@ -1,4 +1,5 @@
-.card {
+/* Estilos para el contenedor principal de la tarjeta */
+.cardContainer {
   background-color: #007bff;
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -16,7 +17,7 @@
 }
 
 /* Otros estilos para el contenido de la tarjeta */
-.card h2 {
+.cardContent h2 {
   font-size: 24px;
   margin-bottom: 10px;
   color: #fff;
@@ -42,7 +43,6 @@
   margin-bottom: 5px;
 }
 
-
 /* Estilos para el contenedor de la imagen de la bandera */
 .flagImageContainer {
   width: 200px; /* Ancho fijo del contenedor */
@@ -57,4 +57,9 @@
   height: 100%; /* La imagen ocupará todo el alto del contenedor */
   object-fit: cover; /* Ajustamos la imagen para que cubra el contenedor */
   object-position: center; /* Centramos la imagen verticalmente dentro del contenedor */
+}
+
+.cardContent a {
+  text-decoration: none; /* Elimina el subrayado de los enlaces */
+  color: #000; /* Cambia el color del texto a negro (o el color que desees) */
 }

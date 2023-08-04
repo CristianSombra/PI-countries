@@ -1,5 +1,3 @@
-/* Resto de estilos ya existentes */
-
 .paginatorContainer {
     display: flex;
     justify-content: center;
@@ -22,3 +20,7 @@
     text-align: center;
   }
   
+  .card-container a {
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+    color: #000; /* Cambia el color del texto a negro (o el color que desees) */
+  }
