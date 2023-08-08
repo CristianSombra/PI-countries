@@ -90,11 +90,16 @@ const createActivity = async (name, difficulty, duration, season, countries) => 
       where: { id: validCountryIds },
     });
 
+    console.log("Valid Country IDs:", validCountryIds);
+    console.log("Countries Found:", countriesFound);
+
     await activity.setCountries(countriesFound); // Relacionar la actividad con los países encontrados en la base de datos
+    console.log(countriesFound);
   }
 
   return activity;
 };
+
 
 
 

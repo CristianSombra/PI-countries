@@ -14,10 +14,15 @@ const Detail = () => {
 
   return (
     <div>
-      <h2>Detalle del país: {country.name}</h2>
-      <p>Continente: {country.continent}</p>
-      <p>Población: {country.population}</p>
+      <h1>Detalle del país</h1>
+      <img src={country.image}/>
+      <p>ID: {country.id}</p>
+      <p>Nombre: {country.name}</p>
       <p>Capital: {country.capital}</p>
+      <p>Continente: {country.continent}</p>
+      <p>Subregion: {country.subregion}</p>
+      <p>Area: {country.area}</p>
+      <p>Población: {country.population}</p>
 
       <h3>Actividades Turísticas:</h3>
       {country.activities.map((activity) => (

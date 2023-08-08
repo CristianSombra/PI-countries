@@ -9,6 +9,7 @@ export const GET_BY_ALFABETIC_ORDER = "GET_BY_ALFABETIC_ORDER";
 export const GET_BY_POPULATION_ORDER = "GET_BY_POPULATION_ORDER";
 export const GET_BY_CONTINENT_ORDER = "GET_BY_CONTINENT_ORDER"
 export const GET_BY_ACTIVITY_ORDER = "GET_BY_ACTIVITY_ORDER";
+export const SET_CONTINENT = "SET_CONTINENT";
 
 
 
@@ -52,6 +53,23 @@ export const getDetail = (id) => {
       }
     };
   }
+
+  // export const postActivity = async (payload) => {
+  //   try {
+  //     const res = await axios.post('http://localhost:3001/activities', payload);
+  //     return res.data; // Devuelve la respuesta del servidor en caso de éxito
+  //   } catch (error) {
+  //     // Devuelve el objeto error para que el componente pueda manejarlo
+  //     throw error;
+  //   }
+  // };
+  
+  export function setContinent(continent){
+    return {
+         type: SET_CONTINENT,
+         payload: continent
+    }
+}
   
 
 
@@ -75,6 +93,7 @@ export function byContinentOrder(payload) {
         payload
     }
 };
+
 
 export const byActivityOrder = (activityName) => ({
     type: GET_BY_ACTIVITY_ORDER,

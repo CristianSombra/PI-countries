@@ -6,6 +6,7 @@ import {
   GET_BY_ACTIVITY_ORDER,
   GET_COUNTRY_BY_NAME,
   GET_DETAIL_BY_ID,
+  SET_CONTINENT,
 } from "./actions";
 
 const initialState = {
@@ -111,7 +112,11 @@ const rootReducer = (state = initialState, action) => {
               details: action.payload,
               loading: false
             };
-          
+          case SET_CONTINENT:
+            return {
+              ...state,
+              continent: action.payload
+              }
           
         default:
           return state;
