@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getCountries } from "../../redux/actions";
+import { getCountries, byActivityOrder } from "../../redux/actions";
 import { useReloadCountriesHandler, useAlfabeticOrderHandlers, usePopulationOrderHandlers, useContinentOrderHandlers, useActivityHandler } from "../../components/handlers/handlers";
 
 import SearchBar from "../../components/searchbar/searchbar"; // Importa la SearchBar
@@ -15,7 +15,6 @@ export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const [orderName, setOrderName] = useState("asc");
   const [orderPopulation, setOrderPopulation] = useState("asc");
-
 
   useEffect(() => {
     dispatch(getCountries());
@@ -32,7 +31,11 @@ export default function Home() {
   const startIndex = (currentPage - 1) * countriesPerPage;
   const endIndex = startIndex + countriesPerPage;
 
+  useEffect(() => {
+    dispatch(byActivityOrder(order));
+  }, [dispatch, order]);
 
+  
   return (
     <div>
       <Link to="/create">Crear actividad turística</Link>
@@ -87,15 +90,16 @@ export default function Home() {
         </div>
 
         <div className={styles.filter}>
-        <select onChange={(e) => handleActivityChange(e.target.value)}>
-          <option value="All">Filtrar por actividad turística</option>
-          {allActivities.map((activity) => (
-            <option value={activity} key={activity}>
-              {activity}
-            </option>
-          ))}
-        </select>
-      </div>
+  <select onChange={(e) => handleActivityChange(e.target.value)}>
+    <option value="All">Filtrar por actividad turística</option>
+    {allActivities.map((activity) => (
+      <option value={activity} key={activity}>
+        {activity}
+      </option>
+    ))}
+  </select>
+</div>
+
       </div>
 
       <div className={styles.cardsContainer}>

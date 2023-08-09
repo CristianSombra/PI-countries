@@ -54,15 +54,6 @@ export const getDetail = (id) => {
     };
   }
 
-  // export const postActivity = async (payload) => {
-  //   try {
-  //     const res = await axios.post('http://localhost:3001/activities', payload);
-  //     return res.data; // Devuelve la respuesta del servidor en caso de éxito
-  //   } catch (error) {
-  //     // Devuelve el objeto error para que el componente pueda manejarlo
-  //     throw error;
-  //   }
-  // };
   
   export function setContinent(continent){
     return {
@@ -95,7 +86,9 @@ export function byContinentOrder(payload) {
 };
 
 
-export const byActivityOrder = (activityName) => ({
-    type: GET_BY_ACTIVITY_ORDER,
-    payload: activityName,
-  });
+export const byActivityOrder = (activityName, order) => {
+    return {
+        type: GET_BY_ACTIVITY_ORDER,
+        payload: { activityName, order },
+    };
+};

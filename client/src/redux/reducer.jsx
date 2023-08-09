@@ -26,7 +26,6 @@ const getAllActivities = (countries) => {
     });
   });
   const allActivitiesArray = Array.from(allActivitiesSet);
-  // console.log("All activities array:", allActivitiesArray);
   return allActivitiesArray;
 };
 
@@ -35,7 +34,6 @@ const getAllActivities = (countries) => {
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_COUNTRIES:
-      // console.log("All activities:", getAllActivities(action.payload));
       return {
         ...state,
         countries: action.payload,
@@ -78,26 +76,32 @@ const rootReducer = (state = initialState, action) => {
       };
 
       case GET_BY_ACTIVITY_ORDER:
-        const activityName = action.payload;
-        if (activityName === "all") {
+        const { activityName, order } = action.payload;
+      
+        if (activityName === "All") {
           return {
             ...state,
-            countries: state.allContinents, // Muestra todos los países almacenados en allContinents
+            countries: state.allContinents,
           };
         }
-  
-        const filteredCountries = state.countries.filter((country) => {
-          const activities = country.activities || []; // Si no hay actividades, inicializa como un arreglo vacío
+      
+        const filteredCountriesByActivity = state.allContinents.filter((country) => {
+          const activities = country.activities || [];
           return activities.some((activity) =>
-            activity.name.toLowerCase() === activityName
+            activity.name.toLowerCase() === activityName.toLowerCase()
           );
         });
-  
-          return {
-            ...state,
-            countries: filteredCountries,
+      
+        // Aplicar orden si está definido
+        const orderedCountries = order === "asc"
+          ? filteredCountriesByActivity.sort((a, b) => a.name.localeCompare(b.name))
+          : filteredCountriesByActivity.sort((a, b) => b.name.localeCompare(a.name));
+      
+        return {
+          ...state,
+          countries: orderedCountries,
         };
-
+      
 
   
         case GET_COUNTRY_BY_NAME:

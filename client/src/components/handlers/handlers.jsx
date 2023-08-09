@@ -64,7 +64,6 @@ export function useActivityHandler() {
   const [order, setOrder] = useState("All");
 
   function handleActivityChange(selectedActivity) {
-    console.log("Selected activity:", selectedActivity);
     setOrder(selectedActivity);
     dispatch(byActivityOrder(selectedActivity)); // No es necesario pasar 'asc' como segundo argumento
   }
