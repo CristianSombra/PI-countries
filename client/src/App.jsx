@@ -1,6 +1,6 @@
 // import { useState } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom';
-import { Home, Landing, Detail, Form } from './views/index';
+import { Landing, Home, Detail, Form, About } from './views/index';
 import Navbar from './components/navbar/navbar';
 
 function App() {
@@ -15,6 +15,7 @@ function App() {
           <Route path="/Home" element={<Home />} />
           <Route path="/Detail/:id" element={<Detail />} />
           <Route path="/Create" element={<Form />} />
+          <Route path="/About" element={<About />} />
       </Routes>
     </div>
   );

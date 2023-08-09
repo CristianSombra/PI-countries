@@ -39,7 +39,6 @@ function CreateActivity() {
   const location = useLocation();
 
   useEffect(() => {
-    console.log(activity);
     dispatch(getCountries());
     dispatch(setContinent(''));
     setInputActivity({
