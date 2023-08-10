@@ -2,9 +2,33 @@
   display:grid;
   grid-template-columns: repeat(2, 1fr); /* Dos columnas de tamaño igual */
   align-items: center;
-  gap: 50px; /* Espacio entre las tarjetas */
+  gap: 100px; /* Espacio entre las tarjetas */
+ 
   
 }
+
+.homeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.searchBar {
+  margin-top: 20px; /* Ajusta el margen superior según sea necesario */
+}
+
+.title {
+  margin-top: 20px; /* Ajusta el margen superior según sea necesario */
+}
+
+/* Agrega estos estilos para el espacio alrededor del SearchBar y los botones */
+.buttonsContainer {
+  margin-top: 20px; /* Ajusta el margen superior según sea necesario */
+  display: flex;
+  gap: 20px;
+}
+
+
 
 .paginatorContainer {
     display: flex;

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Card from "../card/card";
-import style from "./cardscontainer.module.css";
+
 import { useSelector, useDispatch } from "react-redux";
 import { getCountries } from "../../redux/actions";
 
@@ -13,7 +13,7 @@ const CardsContainer = () => {
   }, [dispatch]);
 
   return (
-    <div className={style.container}>
+    <div>
       {countries.map((country) => (
         <Card
           key={country.id}

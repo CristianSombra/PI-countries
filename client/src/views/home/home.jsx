@@ -36,14 +36,14 @@ export default function Home() {
 
   
   return (
-    <div>
-
-      <SearchBar />
+    <div className={styles.homeContainer}>
       
-      <h1>Elige tu destino</h1>
+      <h1 className={styles.tittle}>Elige tu destino</h1>
 
+      <SearchBar className={styles.searchBar}/>
+      
+      <div className={styles.buttonsContainer}>
       <button onClick={(e) => handlerClick(e)}>Volver a cargar todos los paises</button>
-
 
       <div>
         <button
@@ -74,6 +74,8 @@ export default function Home() {
         >
           Descendente por cantidad de población
         </button>
+        </div>
+
 
         <div className={styles.filter}>
           <select onChange={(e) => handlerContinentOrder(e.target.value)}>
