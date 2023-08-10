@@ -1,65 +1,42 @@
-/* Estilos para el contenedor principal de la tarjeta */
-.cardContainer {
-  background-color: #007bff;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-  margin: 10px;
-  padding: 10px;
-  max-width: 500px; /* Limitamos el ancho máximo de la tarjeta */
+.card {
+  background-color: rgb(85, 85, 223); /* Color de fondo azul */
+  color: white; /* Texto en blanco para mayor contraste */
+  padding: 5px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  max-width: 400px; /* Establece el ancho máximo */
+  cursor: pointer;
+  -moz-osx-font-smoothing: grayscale;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  transition: transform 0.25s ease-out;
 }
 
-/* Estilos para el contenido de la tarjeta */
-.cardContent {
+.card:hover {
+  transform: scale(1.05);
+}
+
+.textContainer {
   flex: 1;
-  margin-left: 20px; /* Añadimos un margen a la izquierda del contenido del texto */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }
 
-/* Otros estilos para el contenido de la tarjeta */
-.cardContent h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
-  color: #fff;
-}
-
-.activities {
-  margin-top: 20px;
-  color: #fff;
-}
-
-.activities h4 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.activities ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-.activities li {
-  font-size: 14px;
-  margin-bottom: 5px;
-}
-
-/* Estilos para el contenedor de la imagen de la bandera */
-.flagImageContainer {
-  width: 200px; /* Ancho fijo del contenedor */
-  height: 150px; /* Altura fija de la imagen */
-  overflow: hidden; /* Ocultar partes de la imagen que se salgan del contenedor */
-  border-radius: 15px 15px 0 0; /* Bordes redondeados solo en la esquina superior */
-}
-
-/* Estilos para la imagen de la bandera */
 .flagImage {
-  width: 100%; /* La imagen ocupará todo el ancho del contenedor */
-  height: 100%; /* La imagen ocupará todo el alto del contenedor */
-  object-fit: cover; /* Ajustamos la imagen para que cubra el contenedor */
-  object-position: center; /* Centramos la imagen verticalmente dentro del contenedor */
+  width: 320px; /* Establece el ancho deseado */
+  height: 180px; /* Establece la altura deseada */
+  border-radius: 10px;
+
 }
 
-.cardContent a {
-  text-decoration: none; /* Elimina el subrayado de los enlaces */
-  color: #000; /* Cambia el color del texto a negro (o el color que desees) */
+.flagImageContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

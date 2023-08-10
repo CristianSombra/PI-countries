@@ -7,3 +7,8 @@
     border: 1px solid black;
 
 }
+
+.link {
+    text-decoration: none; /* Elimina el subrayado */
+    color: black; /* Cambia el color del texto a negro */
+  }

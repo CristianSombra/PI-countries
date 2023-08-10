@@ -1,3 +1,11 @@
+.cardsContainer {
+  display:grid;
+  grid-template-columns: repeat(2, 1fr); /* Dos columnas de tamaño igual */
+  align-items: center;
+  gap: 50px; /* Espacio entre las tarjetas */
+  
+}
+
 .paginatorContainer {
     display: flex;
     justify-content: center;
@@ -18,9 +26,4 @@
   .paginationInfo {
     flex: 2;
     text-align: center;
-  }
-  
-  .card-container a {
-    text-decoration: none; /* Elimina el subrayado de los enlaces */
-    color: #000; /* Cambia el color del texto a negro (o el color que desees) */
   }

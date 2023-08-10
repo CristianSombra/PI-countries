@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCountries, byActivityOrder } from "../../redux/actions";
 import { useReloadCountriesHandler, useAlfabeticOrderHandlers, usePopulationOrderHandlers, useContinentOrderHandlers, useActivityHandler } from "../../components/handlers/handlers";
@@ -38,9 +37,10 @@ export default function Home() {
   
   return (
     <div>
-      <Link to="/create">Crear actividad turística</Link>
-      <h1>Esta es la vista de HOME</h1>
+
       <SearchBar />
+      
+      <h1>Elige tu destino</h1>
 
       <button onClick={(e) => handlerClick(e)}>Volver a cargar todos los paises</button>
 
@@ -49,9 +49,7 @@ export default function Home() {
         <button
           onClick={handlerAlfabeticOrderAsc}
           className={orderName === "asc" ? styles.activeButton : ""}
-        >
-          Ascendente por Nombre
-        </button>
+              >Ascendente por Nombre</button>
         <button
           onClick={handlerAlfabeticOrderDesc}
           className={orderName === "desc" ? styles.activeButton : ""}
@@ -107,14 +105,16 @@ export default function Home() {
           allCountries
             .slice(startIndex, endIndex)
             .map((country) => (
-              <Link to={`/Detail/${country.id}`} key={country.id}>
+             
                 <Card
+                  key={country.id}
+                  id={country.id} // Agrega el ID como propiedad
                   name={country.name}
                   image={country.image}
                   continent={country.continent}
                   showDetails={false}
                 />
-              </Link>
+             
             ))}
       </div>
 

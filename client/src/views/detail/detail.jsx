@@ -1,9 +1,10 @@
 import React from "react";
+import styles from "./detail.module.css"
 import { useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom"; // Importamos useParams
+import { Link, useParams } from "react-router-dom";
 
 const Detail = () => {
-  const { id } = useParams(); // Obtenemos el parámetro 'id' de la URL
+  const { id } = useParams();
   const country = useSelector((state) =>
     state.countries.find((country) => country.id === id)
   );
@@ -13,9 +14,9 @@ const Detail = () => {
   }
 
   return (
-    <div>
+    <div className={styles.card}>
       <h1>Detalle del país</h1>
-      <img src={country.image}/>
+      <img src={country.image} className={styles.flagImage} />
       <p>ID: {country.id}</p>
       <p>Nombre: {country.name}</p>
       <p>Capital: {country.capital}</p>
@@ -30,10 +31,14 @@ const Detail = () => {
           <p>Nombre: {activity.name}</p>
           <p>Dificultad: {activity.difficulty}</p>
           <p>Duración: {activity.duration}</p>
+          <p>Estación: {activity.season}</p>
         </div>
       ))}
 
-      <Link to="/Home">Volver a Home</Link> {/* Cambiamos el enlace a "/Home" */}
+      {/* Botón "Volver a Home" fuera del contenedor de la tarjeta */}
+      <div className={styles.goHome}>
+        <Link to="/Home">Volver a Home</Link>
+      </div>
     </div>
   );
 };

@@ -1,0 +1,27 @@
+.card {
+    background-color: rgb(85, 85, 223); /* Color de fondo azul */
+    color: white; /* Texto en blanco para mayor contraste */
+    padding: 5px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    max-width: 400px; /* Establece el ancho máximo */
+}
+
+
+  .flagImage {
+    width: 320px; /* Establece el ancho deseado */
+    height: 180px; /* Establece la altura deseada */
+    border-radius: 10px;
+  
+  }
+  
+  .flagImageContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .goHome {
+    margin-top: 20px; /* Ajusta el margen superior según tu diseño */
+    text-align: center; /* Centra el enlace horizontalmente */
+  }

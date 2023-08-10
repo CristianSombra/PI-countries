@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom'; // Importamos useLocation en lugar de useHistory
@@ -53,7 +54,6 @@ function CreateActivity() {
   useEffect(() => {
     if (activity.idCountries.length > 0 && activity.name !== '' && activity.difficulty !== '' && activity.duration !== '' && activity.season !== '') {
       setError('');
-      console.log(activity);
     }
   }, [activity, error]);
 
@@ -134,7 +134,7 @@ function CreateActivity() {
       });
   
       Swal.fire({
-        title: 'Activity created successfully',
+        title: 'Actividad Creada con éxito',
         confirmButtonColor: "#34a57f"
       });
   
@@ -233,6 +233,8 @@ function CreateActivity() {
         </div>
         {error ? <div className={s.divError}><p>{error}</p></div> : <input type="submit" value="Registrar actividad" className={s.submit} />}
       </form>
+
+      <Link to="/home" className={s.linkButton} >Volver a Home</Link>
     </div>
   )
 }

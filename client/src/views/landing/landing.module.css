@@ -38,8 +38,11 @@
     border-radius: 25px; /* Mayor borde redondeado */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra futurista */
     transition: background-color 0.3s ease-in-out; /* Transición suave al pasar el ratón */
+    transform: translateZ(0);
+    transition: transform 0.25s ease-out;
 }
 
 .landing button:hover {
     background-color: #0056b3;
+    transform: scale(1.05);
 }
