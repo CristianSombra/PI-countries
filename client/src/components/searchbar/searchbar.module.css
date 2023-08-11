@@ -1,0 +1,21 @@
+/* Agrega estos estilos */
+.searchBar {
+    display: flex;
+    align-items: center;
+  }
+  
+  .searchInput {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .searchButton,
+  .reloadButton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: 8px;
+  }
+  

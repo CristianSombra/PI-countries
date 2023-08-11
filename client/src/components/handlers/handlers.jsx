@@ -5,11 +5,9 @@ import { getCountries, byAlfabeticOrder, byPopulationOrder, byContinentOrder, by
 export function useReloadCountriesHandler() {
   const dispatch = useDispatch();
 
-  function handlerClick(e) {
-    e.preventDefault();
+  function handlerClick() {
     dispatch(getCountries());
   }
-
   return handlerClick;
 }
 

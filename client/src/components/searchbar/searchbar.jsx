@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { searchCountryByName } from "../../redux/actions";
+import { searchCountryByName, getCountries } from "../../redux/actions"; // Importa la acción getCountries
+import styles from "./searchbar.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch, faRedo } from "@fortawesome/free-solid-svg-icons";
+import { useReloadCountriesHandler } from "../handlers/handlers";
 
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [noResults, setNoResults] = useState(false);
   const dispatch = useDispatch();
+  const handlerClick = useReloadCountriesHandler(); // Agrega el handler para recargar países
 
   const handleInputChange = (e) => {
     setSearchQuery(e.target.value);
@@ -31,15 +36,39 @@ const SearchBar = () => {
     }
   };
 
+  const handleReloadCountries = async () => {
+    // Realizar la lógica para recargar todos los países aquí
+    // Por ejemplo, puedes llamar a la acción getCountries
+    try {
+      await dispatch(getCountries());
+      handlerClick(); // Ejecuta el handler de recarga de países desde el contexto
+      setNoResults(false); // Restablece el estado de noResults
+    } catch (error) {
+      console.log("Error al recargar países:", error);
+    }
+  };
+
   return (
-    <form onSubmit={handleSearchSubmit}>
+    <form onSubmit={handleSearchSubmit} className={styles.searchForm}>
+      <div className={styles.searchBar}>
       <input
-        type="text"
-        placeholder="Buscar país por nombre..."
-        value={searchQuery}
-        onChange={handleInputChange}
-      />
-      <button type="submit">Buscar</button>
+    className={styles.searchInput}
+    type="text"
+    placeholder="Buscar país por nombre..."
+    value={searchQuery}
+    onChange={handleInputChange}
+  />
+
+
+<div className={styles.searchButtonsContainer}>
+    <button type="submit" className={styles.searchButton}>
+      <FontAwesomeIcon icon={faSearch} />
+    </button>
+    <button type="button" onClick={handleReloadCountries} className={styles.reloadButton}>
+      <FontAwesomeIcon icon={faRedo} />
+    </button>
+  </div>
+</div>
 
       {noResults && <p>No se encontraron resultados de la búsqueda</p>}
     </form>

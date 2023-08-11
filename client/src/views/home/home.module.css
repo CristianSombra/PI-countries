@@ -2,9 +2,8 @@
   display:grid;
   grid-template-columns: repeat(2, 1fr); /* Dos columnas de tamaño igual */
   align-items: center;
-  gap: 100px; /* Espacio entre las tarjetas */
+  gap: 150px; /* Espacio entre las tarjetas */
  
-  
 }
 
 .homeContainer {
@@ -13,20 +12,73 @@
   align-items: center;
 }
 
-.searchBar {
-  margin-top: 20px; /* Ajusta el margen superior según sea necesario */
-}
 
-.title {
-  margin-top: 20px; /* Ajusta el margen superior según sea necesario */
-}
-
-/* Agrega estos estilos para el espacio alrededor del SearchBar y los botones */
-.buttonsContainer {
-  margin-top: 20px; /* Ajusta el margen superior según sea necesario */
+.filterContainer {
   display: flex;
-  gap: 20px;
+  align-items: center;
+  padding-right: 10px; /* Ajusta el espacio entre los filtros */
 }
+
+.filterOptions {
+  flex: 5; /* Ocupar el espacio disponible */
+}
+
+.filterButtonsContainer,
+.buttonsContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px; /* Agrega un margen superior para separar del título */
+}
+
+/* Estilo para los botones de orden ascendente y descendente */
+.orderButton {
+  background-color: coral;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  margin-right: 10px; /* Espacio entre los botones */
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s, transform 0.2s;
+  text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000;
+}
+
+.orderButton:hover {
+  background-color: #e25b5b; /* Cambia el color al pasar el mouse */
+  transform: scale(1.05); /* Efecto de escala al pasar el mouse */
+}
+
+
+/* Estilos para los filtros */
+.filterContainer {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  padding-right: 20px;
+}
+
+.filterOptions select {
+  border: 2px solid #e74c3c; /* Contorno coral oscuro */
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: #e74c3c;
+  background-color: transparent;
+  transition: border-color 0.5s, color 0.5s;
+}
+
+.filterOptions select:hover {
+  background-color: #ff6b6b; /* Cambia el color de fondo en hover */
+  border-color: #d43f3f; /* Cambia el color del borde en hover */
+  color: white; /* Cambia el color del texto en hover */
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+
+.selected {
+  outline: 2px solid black; /* Contorno negro */
+}
+
 
 
 
