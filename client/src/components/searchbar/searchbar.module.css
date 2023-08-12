@@ -1,21 +1,51 @@
 /* Agrega estos estilos */
+.searchForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: transparent;
+  padding: 16px;
+  border: 2px solid aquamarine;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
 .searchBar {
-    display: flex;
-    align-items: center;
-  }
-  
-  .searchInput {
-    flex: 1;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .searchButton,
-  .reloadButton {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    margin-left: 8px;
-  }
-  
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: 1px solid aquamarine; /* Cambia el estilo del contorno */
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.searchInput {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  background-color: transparent;
+  outline: none; /* Quita el borde de enfoque */
+}
+
+.searchButtonsContainer {
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
+}
+
+.searchButton,
+.reloadButton {
+  background-color: aquamarine;
+  border: 2px solid aquamarine;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 8px;
+  padding: 6px 12px;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.searchButton:hover,
+.reloadButton:hover {
+  background-color: transparent;
+  border-color: aquamarine;
+}

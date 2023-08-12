@@ -2,8 +2,8 @@
   display:grid;
   grid-template-columns: repeat(2, 1fr); /* Dos columnas de tamaño igual */
   align-items: center;
-  gap: 150px; /* Espacio entre las tarjetas */
- 
+  gap: 50px; /* Espacio entre las tarjetas */
+  margin-top: 20px;
 }
 
 .homeContainer {
@@ -95,11 +95,49 @@
     gap: 20px;
   }
   
+  .anterior,
+  .siguiente {
+  background-color: aquamarine; /* Cambia el color de fondo a verde aguamarina */
+  color: white;
+  } 
+  
   .paginationButton {
     flex: 1;
   }
   
   .paginationInfo {
-    flex: 2;
-    text-align: center;
-  }
+     flex: 2;
+  text-align: center;
+  border: 2px solid rgb(57, 216, 163); /* Agrega un borde del color deseado */
+  padding: 4px; /* Agrega un poco de espacio interno */
+  border-radius: 4px; /* Añade bordes redondeados */
+  background-color: transparent; /* Establece el fondo transparente */
+  color: rgb(35, 223, 160); /* Cambia el color del texto */
+  font-weight: bold; /* Hace que el texto sea más negrita */
+  text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000; /* Agrega sombra al texto */
+}
+
+.paginationButton {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.paginationButton button {
+  background-color: rgb(89, 249, 196);
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+  color: black;
+  border: 2px solid transparent; /* Agrega un borde transparente por defecto */
+}
+
+.paginationButton button:hover {
+  background-color: transparent;
+  transform: scale(1.05);
+  color: white;
+  border: 2px solid rgb(89, 249, 196);
+}

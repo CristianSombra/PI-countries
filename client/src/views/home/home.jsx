@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCountries, byActivityOrder } from "../../redux/actions";
 import { useAlfabeticOrderHandlers, usePopulationOrderHandlers, useContinentOrderHandlers, useActivityHandler } from "../../components/handlers/handlers";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import SearchBar from "../../components/searchbar/searchbar"; // Importa la SearchBar
 import Card from "../../components/card/card";
@@ -128,27 +130,31 @@ export default function Home() {
       </div>
       <div className={styles.paginatorContainer}>
         <div className={styles.pagination}>
-          <div className={styles.paginationButton}>
-            <button
-              className={`${styles.button} ${styles.anterior}`}
-              onClick={() => setCurrentPage(currentPage - 1)}
-              disabled={currentPage === 1}
-            >
-              Anterior
-            </button>
-          </div>
-          <div className={styles.paginationInfo}>
-            Página {currentPage} de {totalPages}
-          </div>
-          <div className={styles.paginationButton}>
-            <button
-              className={`${styles.button} ${styles.siguiente}`}
-              onClick={() => setCurrentPage(currentPage + 1)}
-              disabled={currentPage === totalPages}
-            >
-              Siguiente
-            </button>
-          </div>
+       
+        <div className={styles.paginationButton}>
+  <button
+    className={styles.anterior}
+    onClick={() => setCurrentPage(currentPage - 1)}
+    disabled={currentPage === 1}
+  >
+    <FontAwesomeIcon icon={faArrowLeft} />
+  </button>
+</div>
+<div className={styles.paginationInfo}>
+   {currentPage} de {totalPages}
+</div>
+<div className={styles.paginationButton}>
+  <button
+    className={styles.siguiente}
+    onClick={() => setCurrentPage(currentPage + 1)}
+    disabled={currentPage === totalPages}
+  >
+    <FontAwesomeIcon icon={faArrowRight} />
+  </button>
+</div>
+
+
+
         </div>
       </div>
     </div>
