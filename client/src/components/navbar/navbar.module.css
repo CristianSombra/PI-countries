@@ -1,14 +1,53 @@
-.mainContainer{
+/* navbar.module.css */
+
+.mainContainer {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
     background-color: lightblue;
     border-radius: 15px;
     border: 1px solid black;
-
-}
-
-.link {
-    text-decoration: none; /* Elimina el subrayado */
-    color: black; /* Cambia el color del texto a negro */
+    margin-bottom: 30px;
+    align-items: center;
+    margin-bottom: 30px; /* Mantén este margen inferior para separar del contenido debajo */
+    margin-top: 20px; /* Agrega un margen superior para separar del contenido encima */
   }
+  
+  .linksContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* Distribuye los elementos horizontalmente */
+    width: 100%; /* Ocupa todo el ancho del navbar */
+    background-color: lightblue;
+    padding: 10px 0; /* Añade espaciado superior e inferior */
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+  
+  .link {
+    text-decoration: none;
+    color: black;
+    padding: 8px 16px;
+    transition: text-shadow 0.3s; /* Agrega transición para el efecto glowing */
+    font-family: 'GlowingFont', sans-serif; /* Reemplaza 'GlowingFont' con el nombre de tu fuente glowing */
+  }
+  
+  .link:hover {
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Efecto glowing al pasar el mouse */
+  }
+  
+  .imageFavicon {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+  
+  .imageFavicon img {
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+  

@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './paginator.module.css';
 
 function Paginator({ currentPage, setCurrentPage, max }) {
   const nextPage = () => {  

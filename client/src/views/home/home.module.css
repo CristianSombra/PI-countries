@@ -112,9 +112,8 @@
   padding: 4px; /* Agrega un poco de espacio interno */
   border-radius: 4px; /* Añade bordes redondeados */
   background-color: transparent; /* Establece el fondo transparente */
-  color: rgb(35, 223, 160); /* Cambia el color del texto */
+  color: black; /* Cambia el color del texto */
   font-weight: bold; /* Hace que el texto sea más negrita */
-  text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000; /* Agrega sombra al texto */
 }
 
 .paginationButton {
@@ -132,12 +131,13 @@
   cursor: pointer;
   transition: background-color 0.2s, transform 0.2s;
   color: black;
-  border: 2px solid transparent; /* Agrega un borde transparente por defecto */
+  border: 2px solid transparent;
 }
 
 .paginationButton button:hover {
   background-color: transparent;
   transform: scale(1.05);
-  color: white;
+  color: none; /* Cambia el color del contenido en hover */
   border: 2px solid rgb(89, 249, 196);
 }
+
