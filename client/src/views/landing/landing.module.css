@@ -1,5 +1,11 @@
+@font-face {
+    font-family: 'patrickhand'; /* El nombre de la fuente que usarás */
+    src: url('../../assets/font/PatrickHand.ttf') format('truetype');
+}
+
+
 .landing {
-    background: url('https://static.vecteezy.com/system/resources/previews/010/538/537/non_2x/map-world-seperate-countries-blue-background-with-outline-free-photo.jpg');
+    background: url('https://img1.wallspic.com/previews/0/7/4/9/99470/99470-barco_blanco_en_el_mar_bajo_un_cielo_azul_durante_el_dia-x750.jpg');
     background-size: cover;
     background-position: center;
     margin: 0;
@@ -23,16 +29,16 @@
 .landing h1 {
     font-size: 60px; /* Tamaño de fuente más grande */
     margin-bottom: 20px;
-    font-family: 'Times New Roman', serif; /* Cambiamos la fuente a Times New Roman */
+    font-family: 'patrickhand', serif;
     font-weight: bold; /* Texto en negrita */
-    color: #222; /* Color más oscuro */
+    color: #0b2f82; /* Color más oscuro */
 }
 
 .landing button {
     font-size: 18px;
     padding: 10px 20px;
     border: none;
-    background-color: #007bff;
+    background-color: coral;
     color: #fff;
     cursor: pointer;
     border-radius: 25px; /* Mayor borde redondeado */
@@ -43,6 +49,6 @@
 }
 
 .landing button:hover {
-    background-color: #0056b3;
+    background-color: rgb(233, 74, 16);
     transform: scale(1.05);
 }

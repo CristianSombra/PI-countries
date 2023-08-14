@@ -4,12 +4,15 @@ import { getCountries, byActivityOrder } from "../../redux/actions";
 import { useAlfabeticOrderHandlers, usePopulationOrderHandlers, useContinentOrderHandlers, useActivityHandler } from "../../components/handlers/handlers";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ImageHeader from "../../assets/img-header/img"; // Ajusta la ruta a tu imagen
 
 import SearchBar from "../../components/searchbar/searchbar"; // Importa la SearchBar
 import Card from "../../components/card/card";
 import styles from "./home.module.css";
 
+
 export default function Home() {
+  
   const dispatch = useDispatch();
   const allCountries = useSelector((state) => state.countries);
   const allActivities = useSelector((state) => state.allActivities);
@@ -41,6 +44,7 @@ export default function Home() {
   
   return (
     <div className={styles.homeContainer}>
+             <ImageHeader />
       <SearchBar className={styles.searchBar} />
       <div className={styles.filterButtonsContainer}>
         <div className={styles.filterContainer}>

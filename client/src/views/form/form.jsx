@@ -7,6 +7,8 @@ import { getCountries, setContinent } from '../../redux/actions'; // Importamos 
 import s from './form.module.css';
 import Swal from 'sweetalert2';
 
+
+
 function valida(input) {
   let errors = {};
   if (!input.name) {
@@ -15,6 +17,8 @@ function valida(input) {
   // Agregar más validaciones si es necesario
   return errors;
 }
+
+
 
 function CreateActivity() {
   const [error, setError] = useState('Completa los datos');
@@ -25,6 +29,10 @@ function CreateActivity() {
     duration: '',
     season: [],
   });
+  
+  
+    const [selectedSeason, setSelectedSeason] = useState('');
+    const [selectedCountry, setSelectedCountry] = useState('');
 
   const countries = useSelector(state => state.countries).sort((a, b) => {
     if (a.name < b.name) {
@@ -52,6 +60,7 @@ function CreateActivity() {
   }, []);
 
   useEffect(() => {
+    console.log('Activity state:', activity);
     if (activity.idCountries.length > 0 && activity.name !== '' && activity.difficulty !== '' && activity.duration !== '' && activity.season !== '') {
       setError('');
     }
@@ -60,6 +69,7 @@ function CreateActivity() {
   useEffect(() => { }, [activity]);
 
   function handlerOnChange(e) {
+    console.log('Input change:', e.target.name, e.target.value);
     setInputActivity({
       ...activity,
       [e.target.name]: e.target.name === 'duration' ? e.target.value.toString() : e.target.value,
@@ -69,10 +79,12 @@ function CreateActivity() {
   function pushSeason(e) {
     const value = e.target.value;
     if (!activity.season.includes(value)) {
+      console.log('Selected season:', value);
       setInputActivity({
         ...activity,
         season: [...activity.season, value]
       });
+      setSelectedSeason(''); // Mostrar la opción seleccionada
     }
   }
 
@@ -89,11 +101,12 @@ function CreateActivity() {
   function pushPais(e) {
     const value = e.target.value;
     if (!activity.idCountries.includes(value)) {
-      // Agregar el país solo si no está presente en la lista
+      console.log('Selected country:', value);
       setInputActivity({
         ...activity,
         idCountries: [...activity.idCountries, value]
       });
+      setSelectedCountry(''); // Mostrar la opción seleccionada
     }
   }
 
@@ -115,12 +128,15 @@ function CreateActivity() {
       return;
     }
   
+    // Restablecer el error en caso de que ahora haya una selección válida
+    setError('');
+  
     const payload = {
       name: activity.name,
       difficulty: activity.difficulty,
       duration: activity.duration,
       season: activity.season,
-      countries: activity.idCountries, // Solo enviar los IDs de país
+      countries: activity.idCountries,
     };
   
     try {
@@ -149,6 +165,7 @@ function CreateActivity() {
     }
   }
   
+  
 
   const season = ['Winter', 'Spring', 'Autumn', 'Summer'];
   const difficulty = ['1', '2', '3', '4', '5']; // Asegurar que sean strings
@@ -156,10 +173,11 @@ function CreateActivity() {
     '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12','13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'
   ]; // Asegurar que sean strings
 
+
   return (
     <div className={s.container}>
-      <h1>Crear Actividad</h1>
-
+      <h1>Puedes crear una actividad</h1>
+  
       <form onSubmit={handlerSubmit} className={s.formulario}>
         <label>Nombre</label>
         <input
@@ -169,15 +187,15 @@ function CreateActivity() {
           onChange={handlerOnChange}
           value={activity.name}
         />
-
-<label>Dificultad</label>
+  
+        <label>Dificultad</label>
         <select name="difficulty" onChange={handlerOnChange} value={activity.difficulty}>
           <option value="">Elige una dificultad</option>
           {difficulty.map((d) => (
             <option key={d} value={d}>{d}</option>
           ))}
         </select>
-
+  
         <label>Duracion</label>
         <select name="duration" onChange={handlerOnChange} value={activity.duration}>
           <option value="">Elige una duración</option>
@@ -185,17 +203,24 @@ function CreateActivity() {
             <option key={hours} value={hours}>{hours} horas</option>
           ))}
         </select>
-
-        <label>Temporada</label>
-        <select name="season" onChange={pushSeason}>
+  
+        <label>Estación</label>
+        <select
+          name="season"
+          onChange={(e) => {
+            pushSeason(e);
+            setSelectedSeason(''); // Restablecer la selección
+          }}
+          value={selectedSeason} // Usa el estado para establecer la selección
+        >
           <option value="">Elige una temporada</option>
           {season.map((s) => (
             <option key={s} value={s}>{s}</option>
           ))}
         </select>
-
+  
         <div className={s.seleccionadosDiv}>
-          <h3>Temporadas Seleccionadas</h3>
+          <h3>Estaciones Seleccionadas</h3>
           <div className={s.seleccionados}>
             {activity.season.length > 0 ? activity.season.map((s) => (
               <div key={s} className={s.seleccionado}>
@@ -205,17 +230,24 @@ function CreateActivity() {
             )) : null}
           </div>
         </div>
-
+  
         <label>Pais</label>
-        <select name="idCountries" onChange={pushPais} required>
+        <select
+          name="idCountries"
+          onChange={(e) => {
+            pushPais(e);
+            setSelectedCountry(''); // Restablecer la selección
+          }}
+          value={selectedCountry} // Usa el estado para establecer la selección
+        >
           <option value="">Selecciona un pais</option>
           {countries.map((country) => (
             <option key={country.id} value={country.id}>{country.name}</option>
           ))}
         </select>
-
+  
         <div className={s.seleccionadosDiv}>
-          <h3>Seleccionados</h3>
+          <h3>Países Seleccionados</h3>
           <div className={s.seleccionados}>
             {activity.idCountries.length > 0 ? countries.map((country) => {
               if (activity.idCountries.includes((country.id).toString())) {
@@ -233,10 +265,11 @@ function CreateActivity() {
         </div>
         {error ? <div className={s.divError}><p>{error}</p></div> : <input type="submit" value="Registrar actividad" className={s.submit} />}
       </form>
-
+  
       <Link to="/home" className={s.linkButton} >Volver a Home</Link>
     </div>
-  )
+  );
+  
 }
 
 export default CreateActivity;

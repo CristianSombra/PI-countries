@@ -1,4 +1,7 @@
-/* navbar.module.css */
+@font-face {
+  font-family: 'patrickhand'; /* El nombre de la fuente que usarás */
+  src: url('../../assets/font/PatrickHand.ttf') format('truetype');
+}
 
 .mainContainer {
     display: flex;
@@ -6,11 +9,31 @@
     justify-content: space-around;
     background-color: lightblue;
     border-radius: 15px;
-    border: 1px solid black;
+    border: 1px solid transparent;
     margin-bottom: 30px;
     align-items: center;
-    margin-bottom: 30px; /* Mantén este margen inferior para separar del contenido debajo */
-    margin-top: 20px; /* Agrega un margen superior para separar del contenido encima */
+    z-index: 1000; /* Asegura que el navbar esté por encima de otros elementos */
+    transition: height 0.3s ease, border-width 0.3s ease; 
+  }
+
+  .imageContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: white; /* Ajusta el fondo según tus necesidades */
+  }
+
+  .sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    border-color: black; /* Cambia el color del borde */
+  background-color: lightblue; /* Agrega un color de fondo al hacerlo fijo */
+  border-width: 2px; /* Ajusta el ancho del borde */
   }
   
   .linksContainer {
@@ -18,10 +41,12 @@
     flex-direction: row;
     justify-content: space-between; /* Distribuye los elementos horizontalmente */
     width: 100%; /* Ocupa todo el ancho del navbar */
-    background-color: lightblue;
-    padding: 10px 0; /* Añade espaciado superior e inferior */
+    background-color: aquamarine;
+    padding: 5px 0; /* Añade espaciado superior e inferior */
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
+    background-color: aquamarine; /* Agrega el fondo del color aquí */
+    border-radius: 15px; /* Aplica los bordes redondeados aquí */
   }
   
   .link {
@@ -51,3 +76,8 @@
     border-top-right-radius: 15px;
   }
   
+  
+.navbarButton {
+  font-family: 'patrickhand', serif;
+  font-size: 25px;
+}

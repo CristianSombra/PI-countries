@@ -1,12 +1,110 @@
+/* form.module.css */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.formulario label {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.formulario input,
+.formulario select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.seleccionadosDiv {
+  margin-top: 15px;
+
+}
+
+.seleccionadosDiv button {
+   background-color: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.seleccionados {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.seleccionado {
+  display: flex;
+  align-items: center;
+  background-color: aquamarine;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px; /* Ajusta el tamaño de fuente */
+}
+
+.seleccionado p {
+  margin-right: 5px;
+}
+
+.seleccionado button {
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.divError {
+  color: red;
+  margin-top: 10px;
+}
+
+.submit {
+  background-color: coral;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
 .linkButton {
-    display: block;
-    margin-top: 20px;
-    text-decoration: none;
-    color: #221e99;
-    font-weight: bold;
-    transition: color 0.3s;
-  }
-  
-  .linkButton:hover {
-    color: #101b7e;
-  }
+  margin-top: 20px;
+  text-decoration: none;
+  background-color: coral;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.linkButton:hover {
+  background-color: rgba(245, 73, 10, 0.927);
+  transform: scale(1.05);
+}
