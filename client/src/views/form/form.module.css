@@ -108,3 +108,18 @@
   background-color: rgba(245, 73, 10, 0.927);
   transform: scale(1.05);
 }
+
+
+/* Estilos para el mensaje de error */
+.divError {
+  color: red;
+  font-size: 20px;
+  margin-top: 18px;
+}
+
+/* Estilos para el mensaje de éxito */
+.divSuccess {
+  color: green;
+  font-size: 20px;
+  margin-top: 18px;
+}

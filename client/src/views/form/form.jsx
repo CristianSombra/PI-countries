@@ -5,9 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom'; // Importamos useLocation en lugar de useHistory
 import { getCountries, setContinent } from '../../redux/actions'; // Importamos solo la acción postActivity
 import s from './form.module.css';
-import Swal from 'sweetalert2';
-
-
 
 function valida(input) {
   let errors = {};
@@ -22,6 +19,9 @@ function valida(input) {
 
 function CreateActivity() {
   const [error, setError] = useState('Completa los datos');
+
+  const [success, setSuccess] = useState('');
+
   const [activity, setInputActivity] = useState({
     idCountries: [],
     name: '',
@@ -69,7 +69,6 @@ function CreateActivity() {
   useEffect(() => { }, [activity]);
 
   function handlerOnChange(e) {
-    console.log('Input change:', e.target.name, e.target.value);
     setInputActivity({
       ...activity,
       [e.target.name]: e.target.name === 'duration' ? e.target.value.toString() : e.target.value,
@@ -79,7 +78,6 @@ function CreateActivity() {
   function pushSeason(e) {
     const value = e.target.value;
     if (!activity.season.includes(value)) {
-      console.log('Selected season:', value);
       setInputActivity({
         ...activity,
         season: [...activity.season, value]
@@ -101,7 +99,6 @@ function CreateActivity() {
   function pushPais(e) {
     const value = e.target.value;
     if (!activity.idCountries.includes(value)) {
-      console.log('Selected country:', value);
       setInputActivity({
         ...activity,
         idCountries: [...activity.idCountries, value]
@@ -148,20 +145,16 @@ function CreateActivity() {
         duration: '',
         season: '',
       });
-  
-      Swal.fire({
-        title: 'Actividad Creada con éxito',
-        confirmButtonColor: "#34a57f"
-      });
+      setSuccess('Actividad creada con éxito'); // Cambio aquí
+
+      setTimeout(() => {
+        setError('');
+        setSuccess('');
+      }, 3000); // Cambia el valor 3000 a la cantidad de milisegundos que quieras que se muestre el mensaje
   
     } catch (error) {
       console.log(error);
-      Swal.fire({
-        title: 'Error creating activity',
-        text: 'An error occurred while creating the activity. Please try again later.',
-        icon: 'error',
-        confirmButtonColor: "#34a57f"
-      });
+      setError('Error al crear la actividad'); // Establece el mensaje de error
     }
   }
   
@@ -266,6 +259,9 @@ function CreateActivity() {
         {error ? <div className={s.divError}><p>{error}</p></div> : <input type="submit" value="Registrar actividad" className={s.submit} />}
       </form>
   
+      
+      {success && <div className={`${s.divSuccess} ${s.message}`}>{success}</div>} {/* Mostrar mensaje de éxito si existe */}
+
       <Link to="/home" className={s.linkButton} >Volver a Home</Link>
     </div>
   );
