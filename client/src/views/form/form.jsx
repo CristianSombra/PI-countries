@@ -118,16 +118,22 @@ function CreateActivity() {
 
   async function handlerSubmit(e) {
     e.preventDefault();
-  
+
     // Validar que al menos un país esté seleccionado
     if (activity.idCountries.length === 0) {
       setError('Selecciona al menos un país.');
       return;
     }
-  
+
+    // Validar el nombre de la actividad
+    if (!activity.name.trim()) {
+      setError('El nombre de la actividad no puede estar vacío.');
+      return;
+    }
+
     // Restablecer el error en caso de que ahora haya una selección válida
     setError('');
-  
+
     const payload = {
       name: activity.name,
       difficulty: activity.difficulty,
@@ -135,7 +141,7 @@ function CreateActivity() {
       season: activity.season,
       countries: activity.idCountries,
     };
-  
+
     try {
       await axios.post('http://localhost:3001/activities', payload);
       setInputActivity({
@@ -145,16 +151,15 @@ function CreateActivity() {
         duration: '',
         season: '',
       });
-      setSuccess('Actividad creada con éxito'); // Cambio aquí
+      setSuccess('Actividad creada con éxito');
 
       setTimeout(() => {
         setError('');
         setSuccess('');
-      }, 3000); // Cambia el valor 3000 a la cantidad de milisegundos que quieras que se muestre el mensaje
-  
+      }, 3000);
     } catch (error) {
       console.log(error);
-      setError('Error al crear la actividad'); // Establece el mensaje de error
+      setError('Error al crear la actividad');
     }
   }
   
