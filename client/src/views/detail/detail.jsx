@@ -4,13 +4,13 @@ import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 
 const Detail = () => {
-  const { id } = useParams();
-  const country = useSelector((state) =>
-    state.countries.find((country) => country.id === id)
+        const { id } = useParams();
+        const country = useSelector((state) =>
+          state.countries.find((country) => country.id === id)
   );
 
   if (!country) {
-    return <p>No se encontró información para el país seleccionado.</p>;
+          return <p>No se encontró información para el país seleccionado.</p>;
   }
 
   return (
@@ -44,7 +44,7 @@ const Detail = () => {
       </div>
 
       <div className={styles.goHome}>
-        <Link to="/Home">Volver a Home</Link>
+        <Link to="/Home">Volver a Inicio</Link>
       </div>
     </div>
   );

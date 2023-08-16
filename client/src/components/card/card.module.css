@@ -1,6 +1,6 @@
 .card {
-  background-color: rgb(136, 206, 227); /* Color de fondo azul */
-  color: white; /* Texto en blanco para mayor contraste */
+  background-color: rgb(136, 206, 227);
+  color: white;
   padding: 25px;
   border-radius: 8px;
   box-shadow: h-shadow v-shadow blur spread color;
@@ -32,8 +32,8 @@
 }
 
 .flagImage {
-  width: 320px; /* Establece el ancho deseado */
-  height: 180px; /* Establece la altura deseada */
+  width: 320px;
+  height: 180px;
   margin-top: 10px;
   border-radius: 10px;
 

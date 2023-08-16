@@ -1,5 +1,3 @@
-/* form.module.css */
-
 .container {
   display: flex;
   flex-direction: column;
@@ -34,12 +32,12 @@
   font-size: 16px;
 }
 
-.seleccionadosDiv {
+.seleccionadosEst {
   margin-top: 15px;
 
 }
 
-.seleccionadosDiv button {
+.seleccionadosEst button {
    background-color: #ff6b6b;
   color: white;
   border: none;
@@ -61,7 +59,7 @@
   background-color: aquamarine;
   padding: 5px 10px;
   border-radius: 5px;
-  font-size: 14px; /* Ajusta el tamaño de fuente */
+  font-size: 14px;
 }
 
 .seleccionado p {
@@ -109,15 +107,13 @@
   transform: scale(1.05);
 }
 
-
-/* Estilos para el mensaje de error */
 .divError {
   color: red;
   font-size: 20px;
   margin-top: 18px;
 }
 
-/* Estilos para el mensaje de éxito */
+
 .divSuccess {
   color: green;
   font-size: 20px;

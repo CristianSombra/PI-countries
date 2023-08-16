@@ -1,27 +1,14 @@
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom'; // Importamos useLocation en lugar de useHistory
-import { getCountries, setContinent } from '../../redux/actions'; // Importamos solo la acción postActivity
-import s from './form.module.css';
-
-function valida(input) {
-  let errors = {};
-  if (!input.name) {
-    errors.name = "Name required";
-  }
-  // Agregar más validaciones si es necesario
-  return errors;
-}
-
+import { getCountriesHandler, InputChangeHandler, CreateActivityHandler } from '../../components/handlers/handlers';
+import styles from './form.module.css';
 
 
 function CreateActivity() {
+  const dispatch = useDispatch();
   const [error, setError] = useState('Completa los datos');
-
   const [success, setSuccess] = useState('');
-
   const [activity, setInputActivity] = useState({
     idCountries: [],
     name: '',
@@ -31,8 +18,10 @@ function CreateActivity() {
   });
   
   
-    const [selectedSeason, setSelectedSeason] = useState('');
-    const [selectedCountry, setSelectedCountry] = useState('');
+  const getCountriesData = getCountriesHandler();
+  const createActivity = CreateActivityHandler()
+  const [selectedSeason, setSelectedSeason] = useState('');
+  const [selectedCountry, setSelectedCountry] = useState('');
 
   const countries = useSelector(state => state.countries).sort((a, b) => {
     if (a.name < b.name) {
@@ -44,12 +33,9 @@ function CreateActivity() {
     return 0;
   });
 
-  const dispatch = useDispatch();
-  const location = useLocation();
 
   useEffect(() => {
-    dispatch(getCountries());
-    dispatch(setContinent(''));
+    getCountriesData(dispatch);
     setInputActivity({
       idCountries: [],
       name: '',
@@ -57,10 +43,9 @@ function CreateActivity() {
       duration: '',
       season: '',
     });
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
-    console.log('Activity state:', activity);
     if (activity.idCountries.length > 0 && activity.name !== '' && activity.difficulty !== '' && activity.duration !== '' && activity.season !== '') {
       setError('');
     }
@@ -68,12 +53,11 @@ function CreateActivity() {
 
   useEffect(() => { }, [activity]);
 
-  function handlerOnChange(e) {
-    setInputActivity({
-      ...activity,
-      [e.target.name]: e.target.name === 'duration' ? e.target.value.toString() : e.target.value,
-    });
+  
+  function OnChange(e) {
+    InputChangeHandler(e, activity, setInputActivity);
   }
+
 
   function pushSeason(e) {
     const value = e.target.value;
@@ -82,34 +66,33 @@ function CreateActivity() {
         ...activity,
         season: [...activity.season, value]
       });
-      setSelectedSeason(''); // Mostrar la opción seleccionada
+      setSelectedSeason('');
     }
   }
 
-  function eliminarSeason(e) {
-    let EliminarSeason = e.target.value;
-    let aux = activity.season.filter(s => s !== EliminarSeason);
+  function eliminateSeason(e) {
+    let EliminateSeason = e.target.value;
+    let aux = activity.season.filter(s => s !== EliminateSeason);
     setInputActivity({
       ...activity,
       season: aux
     });
   }
   
-
-  function pushPais(e) {
+  function pushCountry(e) {
     const value = e.target.value;
     if (!activity.idCountries.includes(value)) {
       setInputActivity({
         ...activity,
         idCountries: [...activity.idCountries, value]
       });
-      setSelectedCountry(''); // Mostrar la opción seleccionada
+      setSelectedCountry('');
     }
   }
 
-  function eliminarCountry(e) {
-    let Eliminarid = e.target.value;
-    let aux = activity.idCountries.filter(id => id !== Eliminarid)
+  function eliminateCountry(e) {
+    let Eliminateid = e.target.value;
+    let aux = activity.idCountries.filter(id => id !== Eliminateid)
     setInputActivity({
       ...activity,
       idCountries: aux
@@ -119,19 +102,16 @@ function CreateActivity() {
   async function handlerSubmit(e) {
     e.preventDefault();
 
-    // Validar que al menos un país esté seleccionado
     if (activity.idCountries.length === 0) {
       setError('Selecciona al menos un país.');
       return;
     }
 
-    // Validar el nombre de la actividad
     if (!activity.name.trim()) {
       setError('El nombre de la actividad no puede estar vacío.');
       return;
     }
 
-    // Restablecer el error en caso de que ahora haya una selección válida
     setError('');
 
     const payload = {
@@ -142,52 +122,51 @@ function CreateActivity() {
       countries: activity.idCountries,
     };
 
-    try {
-      await axios.post('http://localhost:3001/activities', payload);
-      setInputActivity({
-        idCountries: [],
-        name: '',
-        difficulty: '',
-        duration: '',
-        season: '',
-      });
-      setSuccess('Actividad creada con éxito');
 
-      setTimeout(() => {
-        setError('');
-        setSuccess('');
-      }, 3000);
-    } catch (error) {
-      console.log(error);
-      setError('Error al crear la actividad');
-    }
+  try {
+    await (createActivity(payload));
+    setInputActivity({
+      idCountries: [],
+      name: '',
+      difficulty: '',
+      duration: '',
+      season: '',
+    });
+    setSuccess('Actividad creada con éxito');
+
+    setTimeout(() => {
+      setError('');
+      setSuccess('');
+    }, 3000);
+  } catch (error) {
+    setError('Error al crear la actividad');
   }
+}
   
   
-
   const season = ['Winter', 'Spring', 'Autumn', 'Summer'];
-  const difficulty = ['1', '2', '3', '4', '5']; // Asegurar que sean strings
+  const difficulty = ['1', '2', '3', '4', '5']; 
   const duration = [
     '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12','13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'
-  ]; // Asegurar que sean strings
+  ];
 
 
   return (
-    <div className={s.container}>
+    <div className={styles.container}>
       <h1>Puedes crear una actividad</h1>
   
-      <form onSubmit={handlerSubmit} className={s.formulario}>
+      <form onSubmit={handlerSubmit} className={styles.formulario}>
         <label>Nombre</label>
         <input
           type="text"
           placeholder="Nombre de la actividad"
           name="name"
-          onChange={handlerOnChange}
+          onChange={OnChange}
           value={activity.name}
         />
   
         <label>Dificultad</label>
-        <select name="difficulty" onChange={handlerOnChange} value={activity.difficulty}>
+        <select name="difficulty" onChange={OnChange} value={activity.difficulty}>
           <option value="">Elige una dificultad</option>
           {difficulty.map((d) => (
             <option key={d} value={d}>{d}</option>
@@ -195,7 +174,7 @@ function CreateActivity() {
         </select>
   
         <label>Duracion</label>
-        <select name="duration" onChange={handlerOnChange} value={activity.duration}>
+        <select name="duration" onChange={OnChange} value={activity.duration}>
           <option value="">Elige una duración</option>
           {duration.map((hours) => (
             <option key={hours} value={hours}>{hours} horas</option>
@@ -207,9 +186,9 @@ function CreateActivity() {
           name="season"
           onChange={(e) => {
             pushSeason(e);
-            setSelectedSeason(''); // Restablecer la selección
+            setSelectedSeason('');
           }}
-          value={selectedSeason} // Usa el estado para establecer la selección
+          value={selectedSeason}
         >
           <option value="">Elige una temporada</option>
           {season.map((s) => (
@@ -217,13 +196,13 @@ function CreateActivity() {
           ))}
         </select>
   
-        <div className={s.seleccionadosDiv}>
+        <div className={styles.seleccionadosEst}>
           <h3>Estaciones Seleccionadas</h3>
-          <div className={s.seleccionados}>
+          <div className={styles.seleccionados}>
             {activity.season.length > 0 ? activity.season.map((s) => (
-              <div key={s} className={s.seleccionado}>
+              <div key={s} className={styles.seleccionado}>
                 <p>{s}</p>
-                <button value={s} onClick={eliminarSeason}>x</button>
+                <button value={s} onClick={eliminateSeason}>x</button>
               </div>
             )) : null}
           </div>
@@ -233,10 +212,10 @@ function CreateActivity() {
         <select
           name="idCountries"
           onChange={(e) => {
-            pushPais(e);
-            setSelectedCountry(''); // Restablecer la selección
+            pushCountry(e);
+            setSelectedCountry('');
           }}
-          value={selectedCountry} // Usa el estado para establecer la selección
+          value={selectedCountry}
         >
           <option value="">Selecciona un pais</option>
           {countries.map((country) => (
@@ -244,15 +223,15 @@ function CreateActivity() {
           ))}
         </select>
   
-        <div className={s.seleccionadosDiv}>
+        <div className={styles.seleccionadosDiv}>
           <h3>Países Seleccionados</h3>
-          <div className={s.seleccionados}>
+          <div className={styles.seleccionados}>
             {activity.idCountries.length > 0 ? countries.map((country) => {
               if (activity.idCountries.includes((country.id).toString())) {
                 return (
-                  <div key={country.id} className={s.seleccionado}>
+                  <div key={country.id} className={styles.seleccionado}>
                     <p>{country.name}</p>
-                    <button value={country.id} onClick={eliminarCountry}>x</button>
+                    <button value={country.id} onClick={eliminateCountry}>x</button>
                   </div>
                 )
               } else {
@@ -261,13 +240,13 @@ function CreateActivity() {
             }) : []}
           </div>
         </div>
-        {error ? <div className={s.divError}><p>{error}</p></div> : <input type="submit" value="Registrar actividad" className={s.submit} />}
+        {error ? <div className={styles.divError}><p>{error}</p></div> : <input type="submit" value="Registrar actividad" className={styles.submit} />}
       </form>
   
       
-      {success && <div className={`${s.divSuccess} ${s.message}`}>{success}</div>} {/* Mostrar mensaje de éxito si existe */}
+      {success && <div className={`${styles.divSuccess} ${styles.message}`}>{success}</div>}
 
-      <Link to="/home" className={s.linkButton} >Volver a Home</Link>
+      <Link to="/home" className={styles.linkButton} >Volver a Inicio</Link>
     </div>
   );
   

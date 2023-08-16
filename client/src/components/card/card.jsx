@@ -3,20 +3,19 @@ import style from "./card.module.css";
 import { Link } from "react-router-dom";
 
 const Card = (props) => {
-  // Asegurarnos de que props.activities sea un array válido, incluso si está undefined
+
   const activities = props.activities || [];
 
   return (
     <div className={style.card}>
       <div className={style.flagImageContainer}>
-      <Link to={`/detail/${props.id}`}> {/* Agrega el Link aquí */}
+      <Link to={`/detail/${props.id}`}>
         <img src={props.image} alt={props.name} className={style.flagImage} />
         </Link>
       </div>
       <div className={style.textContainer}>
         <h2>{props.name}</h2>
         <p>Continent: {props.continent}</p>
-        {/* Mostrar detalles solo si showDetails es true */}
         {props.showDetails ? (
           <>
             <p>Capital: {props.capital}</p>

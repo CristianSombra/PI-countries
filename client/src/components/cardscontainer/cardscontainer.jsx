@@ -25,7 +25,7 @@ const CardsContainer = () => {
           area={country.area}
           population={country.population}
           activities={country.activities}
-          showDetails={true} // Mostrar todos los detalles
+          showDetails={true}
         />
       ))}
     </div>

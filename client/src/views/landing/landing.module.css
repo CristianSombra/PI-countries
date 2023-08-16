@@ -1,5 +1,5 @@
 @font-face {
-    font-family: 'patrickhand'; /* El nombre de la fuente que usarás */
+    font-family: 'patrickhand';
     src: url('../../assets/font/PatrickHand.ttf') format('truetype');
 }
 
@@ -19,19 +19,19 @@
 
 .landing-content {
     text-align: center;
-    margin-bottom: 50px; /* Ajustamos la distancia desde la parte inferior */
-    max-width: 600px; /* Limitamos el ancho del contenido */
-    background-color: rgba(255, 255, 255, 0.7); /* Fondo blanco semi-transparente */
-    padding: 20px; /* Espaciado interno */
-    border-radius: 10px; /* Bordes redondeados */
+    margin-bottom: 50px;
+    max-width: 600px;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    border-radius: 10px;
 }
 
 .landing h1 {
-    font-size: 60px; /* Tamaño de fuente más grande */
+    font-size: 60px;
     margin-bottom: 20px;
     font-family: 'patrickhand', serif;
-    font-weight: bold; /* Texto en negrita */
-    color: #0b2f82; /* Color más oscuro */
+    font-weight: bold;
+    color: #0b2f82;
 }
 
 .landing button {
@@ -41,9 +41,9 @@
     background-color: coral;
     color: #fff;
     cursor: pointer;
-    border-radius: 25px; /* Mayor borde redondeado */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra futurista */
-    transition: background-color 0.3s ease-in-out; /* Transición suave al pasar el ratón */
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease-in-out; 
     transform: translateZ(0);
     transition: transform 0.25s ease-out;
 }

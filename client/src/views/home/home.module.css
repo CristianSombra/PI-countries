@@ -1,8 +1,8 @@
 .cardsContainer {
   display:grid;
-  grid-template-columns: repeat(2, 1fr); /* Dos columnas de tamaño igual */
+  grid-template-columns: repeat(2, 1fr);
   align-items: center;
-  gap: 50px; /* Espacio entre las tarjetas */
+  gap: 50px;
   margin-top: 20px;
 }
 
@@ -12,32 +12,12 @@
   align-items: center;
 }
 
-
-.filterContainer {
-  display: flex;
-  align-items: center;
-  padding-right: 10px; /* Ajusta el espacio entre los filtros */
-}
-
-.filterOptions {
-  flex: 5; /* Ocupar el espacio disponible */
-}
-
-.filterButtonsContainer,
-.buttonsContainer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 20px; /* Agrega un margen superior para separar del título */
-}
-
-/* Estilo para los botones de orden ascendente y descendente */
 .orderButton {
   background-color: coral;
   color: white;
   border: none;
   padding: 8px 16px;
-  margin-right: 10px; /* Espacio entre los botones */
+  margin-right: 10px;
   cursor: pointer;
   border-radius: 4px;
   transition: background-color 0.3s, transform 0.2s;
@@ -45,21 +25,25 @@
 }
 
 .orderButton:hover {
-  background-color: #e25b5b; /* Cambia el color al pasar el mouse */
-  transform: scale(1.05); /* Efecto de escala al pasar el mouse */
+  background-color: #e25b5b;
+  transform: scale(1.05);
 }
 
 
-/* Estilos para los filtros */
-.filterContainer {
+.filterButtonsContainer,
+.buttonsContainer {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  flex: 1;
+  margin-top: 20px;
+}
+
+.filterContainer {
   padding-right: 20px;
 }
 
 .filterOptions select {
-  border: 2px solid #e74c3c; /* Contorno coral oscuro */
+  border: 2px solid #e74c3c;
   border-radius: 5px;
   padding: 5px 10px;
   color: #e74c3c;
@@ -68,18 +52,16 @@
 }
 
 .filterOptions select:hover {
-  background-color: #ff6b6b; /* Cambia el color de fondo en hover */
-  border-color: #d43f3f; /* Cambia el color del borde en hover */
-  color: white; /* Cambia el color del texto en hover */
+  background-color: #ff6b6b;
+  border-color: #d43f3f;
+  color: white;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 
 .selected {
-  outline: 2px solid black; /* Contorno negro */
+  outline: 2px solid black; 
 }
-
-
 
 
 .paginatorContainer {
@@ -97,23 +79,19 @@
   
   .anterior,
   .siguiente {
-  background-color: aquamarine; /* Cambia el color de fondo a verde aguamarina */
+  background-color: aquamarine;
   color: white;
   } 
   
-  .paginationButton {
-    flex: 1;
-  }
-  
   .paginationInfo {
-     flex: 2;
+  flex: 2;
   text-align: center;
-  border: 2px solid rgb(57, 216, 163); /* Agrega un borde del color deseado */
-  padding: 4px; /* Agrega un poco de espacio interno */
-  border-radius: 4px; /* Añade bordes redondeados */
-  background-color: transparent; /* Establece el fondo transparente */
-  color: black; /* Cambia el color del texto */
-  font-weight: bold; /* Hace que el texto sea más negrita */
+  border: 2px solid rgb(57, 216, 163);
+  padding: 4px;
+  border-radius: 4px; 
+  background-color: transparent; 
+  color: black; 
+  font-weight: bold; 
 }
 
 .paginationButton {
@@ -137,7 +115,7 @@
 .paginationButton button:hover {
   background-color: transparent;
   transform: scale(1.05);
-  color: none; /* Cambia el color del contenido en hover */
+  color: none;
   border: 2px solid rgb(89, 249, 196);
 }
 

@@ -1,5 +1,5 @@
 @font-face {
-  font-family: 'patrickhand'; /* El nombre de la fuente que usarás */
+  font-family: 'patrickhand';
   src: url('../../assets/font/PatrickHand.ttf') format('truetype');
 }
 
@@ -12,7 +12,7 @@
     border: 1px solid transparent;
     margin-bottom: 30px;
     align-items: center;
-    z-index: 1000; /* Asegura que el navbar esté por encima de otros elementos */
+    z-index: 1000; 
     transition: height 0.3s ease, border-width 0.3s ease; 
   }
 
@@ -22,7 +22,7 @@
     left: 0;
     width: 100%;
     z-index: 1000;
-    background-color: white; /* Ajusta el fondo según tus necesidades */
+    background-color: white; 
   }
 
   .sticky {
@@ -31,34 +31,34 @@
     left: 0;
     width: 100%;
     z-index: 1000;
-    border-color: black; /* Cambia el color del borde */
-  background-color: lightblue; /* Agrega un color de fondo al hacerlo fijo */
-  border-width: 2px; /* Ajusta el ancho del borde */
+    border-color: black;
+  background-color: lightblue; 
+  border-width: 2px; 
   }
   
   .linksContainer {
     display: flex;
     flex-direction: row;
-    justify-content: space-between; /* Distribuye los elementos horizontalmente */
-    width: 100%; /* Ocupa todo el ancho del navbar */
+    justify-content: space-between;
+    width: 100%; 
     background-color: aquamarine;
-    padding: 5px 0; /* Añade espaciado superior e inferior */
+    padding: 5px 0; 
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
-    background-color: aquamarine; /* Agrega el fondo del color aquí */
-    border-radius: 15px; /* Aplica los bordes redondeados aquí */
+    background-color: aquamarine;
+    border-radius: 15px;
   }
   
   .link {
     text-decoration: none;
     color: black;
     padding: 8px 16px;
-    transition: text-shadow 0.3s; /* Agrega transición para el efecto glowing */
-    font-family: 'GlowingFont', sans-serif; /* Reemplaza 'GlowingFont' con el nombre de tu fuente glowing */
+    transition: text-shadow 0.3s;
+    font-family: 'GlowingFont', sans-serif;
   }
   
   .link:hover {
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Efecto glowing al pasar el mouse */
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   }
   
   .imageFavicon {
