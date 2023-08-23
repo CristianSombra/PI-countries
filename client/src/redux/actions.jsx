@@ -8,7 +8,7 @@ export const GET_BY_ALFABETIC_ORDER = "GET_BY_ALFABETIC_ORDER";
 export const GET_BY_POPULATION_ORDER = "GET_BY_POPULATION_ORDER";
 export const GET_BY_CONTINENT_ORDER = "GET_BY_CONTINENT_ORDER"
 export const GET_BY_ACTIVITY_ORDER = "GET_BY_ACTIVITY_ORDER";
-export const CREATE_ACTIVITY_SUCCESS = "CREATE_ACTIVITY_SUCCESS";
+export const CREATE_ACTIVITY = "CREATE_ACTIVITY";
 
 
 export const getCountries = () => {
@@ -59,7 +59,7 @@ export const getDetail = (id) => {
     return async (dispatch) => {
       try {
         await axios.post('http://localhost:3001/activities', payload);
-        dispatch({ type: CREATE_ACTIVITY_SUCCESS });
+        dispatch({ type: CREATE_ACTIVITY });
       } catch (error) {
         const errorMessage = 'Error al crear la actividad';
         dispatch({ type: ERROR, payload: errorMessage });

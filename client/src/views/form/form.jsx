@@ -54,6 +54,19 @@ function CreateActivity() {
   useEffect(() => { }, [activity]);
 
   
+  function validateName(e) {
+    if (/^[a-zA-Z\s]+$/.test(e.target.value) || e.target.value === "") {
+      if (e.target.value.length <= 20) {
+        InputChangeHandler(e, activity, setInputActivity);
+        setError("");
+      } else {
+        setError("El nombre debe tener un máximo de 20 caracteres");
+      }
+    } else {
+      setError("Solo se permiten letras en el nombre");
+    }
+  }
+
   function OnChange(e) {
     InputChangeHandler(e, activity, setInputActivity);
   }
@@ -161,7 +174,7 @@ function CreateActivity() {
           type="text"
           placeholder="Nombre de la actividad"
           name="name"
-          onChange={OnChange}
+          onChange={validateName}
           value={activity.name}
         />
   

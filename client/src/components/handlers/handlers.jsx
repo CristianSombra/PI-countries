@@ -1,22 +1,33 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getCountries, byAlfabeticOrder, byPopulationOrder, byContinentOrder, byActivityOrder, createActivity } from "../../redux/actions";
+import { getCountries, byAlfabeticOrder, byPopulationOrder, byContinentOrder, byActivityOrder, createActivity, searchCountryByName } from "../../redux/actions";
 
 
-//Handlers de Home
-export function getCountriesHandler() {
+//HANDLERS DE SEARCHBAR
+
+export function usehandlerSearchSubmit (setNoResults) {
   const dispatch = useDispatch();
 
-  async function getCountriesData() {
-    try {
-      await dispatch(getCountries());
-    } catch (error) {
-      console.error("Error fetching countries:", error);
+  async function handlerSearchSubmit(e, searchQuery, onPageChange) {
+    e.preventDefault();
+  try {
+    const apiData = await dispatch(searchCountryByName(searchQuery));
+ 
+    if (apiData && apiData.data && apiData.data.length === 0) {
+      setNoResults(true);
+    } else {
+      setNoResults(false);
+      onPageChange(1);
     }
+  } catch (error) {
+   
+    console.log("Error al buscar país por nombre:", error);
+    setNoResults(true); 
   }
-  return getCountriesData;
-}
+};
 
+  return handlerSearchSubmit;
+}
 
 export function useReloadCountriesHandler() {
   const dispatch = useDispatch();
@@ -28,20 +39,36 @@ export function useReloadCountriesHandler() {
 }
 
 
+
+//HANDLERS DE HOME
+export function getCountriesHandler() {
+  const dispatch = useDispatch();
+
+  async function getCountriesData() {
+    try {
+      await dispatch(getCountries());
+    } catch (error) {
+      console.error("Error al recargar países", error);
+    }
+  }
+  return getCountriesData;
+}
+
+
 export function useAlfabeticOrderHandlers() {
   const dispatch = useDispatch();
 
-  function handlerAlfabeticOrderAsc() {
+  function alfabeticOrderAsc() {
     dispatch(byAlfabeticOrder("asc"));
   }
 
-  function handlerAlfabeticOrderDesc() {
+  function alfabeticOrderDesc() {
     dispatch(byAlfabeticOrder("desc"));
   }
 
   return {
-    handlerAlfabeticOrderAsc,
-    handlerAlfabeticOrderDesc,
+    alfabeticOrderAsc,
+    alfabeticOrderDesc,
   };
 }
 
@@ -49,17 +76,17 @@ export function useAlfabeticOrderHandlers() {
 export function usePopulationOrderHandlers() {
   const dispatch = useDispatch();
 
-  function handlerPopulationOrderAsc() {
+  function populationOrderAsc() {
     dispatch(byPopulationOrder("asc"));
   }
 
-  function handlerPopulationOrderDesc() {
+  function populationOrderDesc() {
     dispatch(byPopulationOrder("desc"));
   }
 
   return {
-    handlerPopulationOrderAsc,
-    handlerPopulationOrderDesc,
+    populationOrderAsc,
+    populationOrderDesc,
   };
 }
 
@@ -97,8 +124,7 @@ export function useActivityHandler() {
 
 
 
-//Handlres de Form:
-
+//HANDLERS DE FORM:
 
 export function InputChangeHandler(e, activity, setInputActivity) {
   setInputActivity({

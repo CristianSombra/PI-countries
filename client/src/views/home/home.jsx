@@ -21,8 +21,8 @@ export default function Home() {
   const [selectedActivity, setSelectedActivity] = useState("All");
 
   const getCountriesData = getCountriesHandler();
-  const { handlerAlfabeticOrderAsc, handlerAlfabeticOrderDesc } = useAlfabeticOrderHandlers();
-  const { handlerPopulationOrderAsc, handlerPopulationOrderDesc } = usePopulationOrderHandlers();
+  const { alfabeticOrderAsc, alfabeticOrderDesc } = useAlfabeticOrderHandlers();
+  const { populationOrderAsc, populationOrderDesc } = usePopulationOrderHandlers();
   const { handlerContinentOrder } = useContinentOrderHandlers();
   const { order, handlerActivityChange } = useActivityHandler();
   
@@ -84,21 +84,21 @@ export default function Home() {
         </div>
       
         <div className={styles.buttonsContainer}>
-        <button onClick={handlerAlfabeticOrderAsc} 
+        <button onClick={alfabeticOrderAsc} 
             className={ `${orderName === "asc" ? styles.activeButton : ""} ${styles.orderButton}`}
                 > Ascendente por Nombre </button>
         
-        <button onClick={handlerAlfabeticOrderDesc}
+        <button onClick={alfabeticOrderDesc}
             className={`${orderName === "desc" ? styles.activeButton : ""} ${styles.orderButton}`}
                 > Descendente por Nombre </button>
         
-        <button onClick={() => {handlerPopulationOrderAsc();
+        <button onClick={() => {populationOrderAsc();
             setOrderPopulation("asc");
           }}
           className={`${orderPopulation === "asc" ? styles.activeButton : ""} ${styles.orderButton}`}
                 > Ascendente por cantidad de población </button>
         
-        <button onClick={() => {handlerPopulationOrderDesc();
+        <button onClick={() => {populationOrderDesc();
             setOrderPopulation("desc");
           }}
           className={`${orderPopulation === "desc" ? styles.activeButton : ""} ${styles.orderButton}`}
